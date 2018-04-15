@@ -28,6 +28,7 @@ class DataModel: NSObject, URLSessionDataDelegate {
             }
             else{
                 print("Data Downloaded")
+                //Able to download data from database, now need to parse it
                 self.parseJSON(data!, dataBase: dataBase)
             }
         }
@@ -49,7 +50,7 @@ class DataModel: NSObject, URLSessionDataDelegate {
         for i in 0 ..< jsonResult.count{
             jsonElement = jsonResult[i] as! NSDictionary
             
-            
+            //There are currently two databases, parks and attractions
             if dataBase == "parks"{
                 let park = ParksModel()
                 park.parkID = Int(jsonElement["parkID"] as! String)!
