@@ -1,5 +1,5 @@
 //
-//  homeModel.swift
+//  DataModel.swift
 //  Ride Track
 //
 //  Created by Mark Lawrence on 4/14/18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol HomeModelProtocol: class {
+protocol DataModelProtocol: class {
     func itemsDownloaded(items: NSArray)
 }
 
-class HomeModel: NSObject, URLSessionDataDelegate {
+class DataModel: NSObject, URLSessionDataDelegate {
 
-    weak var delegate: HomeModelProtocol!
+    weak var delegate: DataModelProtocol!
     var data = Data()
     
     

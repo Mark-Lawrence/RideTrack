@@ -15,10 +15,9 @@
 		5F75595F2082B0E80060CED5 /* Ride_TrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75595E2082B0E80060CED5 /* Ride_TrackTests.swift */; };
 		5F75596A2082B0E80060CED5 /* Ride_TrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559692082B0E80060CED5 /* Ride_TrackUITests.swift */; };
 		5F7559782082B1D60060CED5 /* AttractionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559772082B1D60060CED5 /* AttractionsModel.swift */; };
-		5F75597A2082B2E50060CED5 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559792082B2E50060CED5 /* HomeModel.swift */; };
+		5F75597A2082B2E50060CED5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559792082B2E50060CED5 /* DataModel.swift */; };
 		5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */; };
 		5F7559802083D40E0060CED5 /* ParksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597F2083D40E0060CED5 /* ParksModel.swift */; };
-		5FC150B02083E29400DB1A53 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC150AF2083E29400DB1A53 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +52,9 @@
 		5F7559692082B0E80060CED5 /* Ride_TrackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride_TrackUITests.swift; sourceTree = "<group>"; };
 		5F75596B2082B0E80060CED5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F7559772082B1D60060CED5 /* AttractionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionsModel.swift; sourceTree = "<group>"; };
-		5F7559792082B2E50060CED5 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		5F7559792082B2E50060CED5 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionsViewController.swift; sourceTree = "<group>"; };
 		5F75597F2083D40E0060CED5 /* ParksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksModel.swift; sourceTree = "<group>"; };
-		5FC150AF2083E29400DB1A53 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +108,8 @@
 				5F7559492082B0E10060CED5 /* AppDelegate.swift */,
 				5F75594B2082B0E10060CED5 /* ViewController.swift */,
 				5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */,
-				5FC150AF2083E29400DB1A53 /* TestViewController.swift */,
 				5F75594D2082B0E10060CED5 /* Main.storyboard */,
-				5F7559792082B2E50060CED5 /* HomeModel.swift */,
+				5F7559792082B2E50060CED5 /* DataModel.swift */,
 				5F7559772082B1D60060CED5 /* AttractionsModel.swift */,
 				5F75597F2083D40E0060CED5 /* ParksModel.swift */,
 				5F7559502082B0E80060CED5 /* Assets.xcassets */,
@@ -271,8 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FC150B02083E29400DB1A53 /* TestViewController.swift in Sources */,
-				5F75597A2082B2E50060CED5 /* HomeModel.swift in Sources */,
+				5F75597A2082B2E50060CED5 /* DataModel.swift in Sources */,
 				5F75594C2082B0E10060CED5 /* ViewController.swift in Sources */,
 				5F75594A2082B0E10060CED5 /* AppDelegate.swift in Sources */,
 				5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */,

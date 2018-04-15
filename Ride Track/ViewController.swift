@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeModelProtocol {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol {
 
     @IBOutlet weak var listTableView: UITableView!
     
@@ -25,10 +25,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
-        let homeModel = HomeModel()
-        homeModel.delegate = self
+        let dataModel = DataModel()
+        dataModel.delegate = self
         
-        homeModel.downloadData(urlPath: urlPath, dataBase: "parks")
+        dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
         
         // Do any additional setup after loading the view, typically from a nib.

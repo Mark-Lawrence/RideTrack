@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttractionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeModelProtocol {
+class AttractionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol {
 
     @IBOutlet weak var attractionsTableView: UITableView!
     @IBOutlet weak var parkLabel: UILabel!
@@ -26,10 +26,10 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         
         let urlPath = "http://www.beingpositioned.com/theparksman/attractiondbservice.php?parkid=\(parkID)"
         
-        let homeModel = HomeModel()
-        homeModel.delegate = self
+        let dataModel = DataModel()
+        dataModel.delegate = self
         
-        homeModel.downloadData(urlPath: urlPath, dataBase: "attractions")
+        dataModel.downloadData(urlPath: urlPath, dataBase: "attractions")
         
         
         // Do any additional setup after loading the view, typically from a nib.
