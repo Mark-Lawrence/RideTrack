@@ -69,6 +69,7 @@ class DataModel: NSObject, URLSessionDataDelegate {
                 attraction.active = jsonElement["active"] as? Bool
                 
                 print(jsonElement["name"] as? String)
+                
                 dataBaseData.add(attraction)
             }
         }
