@@ -63,11 +63,12 @@ class DataModel: NSObject, URLSessionDataDelegate {
             }
             if dataBase == "attractions"{
                 let attraction = AttractionsModel()
-                attraction.attractionID = jsonElement["attractionID"] as? Int
+                attraction.attractionID = jsonElement["rideID"] as? Int
                 attraction.name = jsonElement["name"] as? String
-                attraction.parkID = jsonElement["parkID"] as? Int
+                attraction.parkID = jsonElement["ParkID"] as? Int
                 attraction.active = jsonElement["active"] as? Bool
                 
+                print(jsonElement["name"] as? String)
                 dataBaseData.add(attraction)
             }
         }

@@ -64,7 +64,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let attractionVC = segue.destination as! AttractionsViewController
             let selectedIndex = listTableView.indexPathForSelectedRow?.row
             selectedPark = feedItems[selectedIndex!] as! ParksModel
-            print(attractionVC.parkID)
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
             
