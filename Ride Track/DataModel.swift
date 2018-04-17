@@ -53,10 +53,10 @@ class DataModel: NSObject, URLSessionDataDelegate {
             //There are currently two databases, parks and attractions
             if dataBase == "parks"{
                 let park = ParksModel()
-                park.parkID = Int(jsonElement["parkID"] as! String)!
-                park.name = jsonElement["name"] as! String
-                park.longitude = Double(jsonElement["longitude"] as! String)!
-                park.latitude = Double(jsonElement["latitude"] as! String)!
+                park.parkID = Int(jsonElement["id"] as! String)!
+                park.name = jsonElement["Name"] as! String
+                //park.longitude = Double(jsonElement["longitude"] as! String)!
+                //park.latitude = Double(jsonElement["latitude"] as! String)!
         
                 dataBaseData.add(park)
                 
@@ -64,11 +64,9 @@ class DataModel: NSObject, URLSessionDataDelegate {
             if dataBase == "attractions"{
                 let attraction = AttractionsModel()
                 attraction.attractionID = jsonElement["rideID"] as? Int
-                attraction.name = jsonElement["name"] as? String
+                attraction.name = jsonElement["Name"] as? String
                 attraction.parkID = jsonElement["ParkID"] as? Int
                 attraction.active = jsonElement["active"] as? Bool
-                
-                print(jsonElement["name"] as? String)
                 
                 dataBaseData.add(attraction)
             }
