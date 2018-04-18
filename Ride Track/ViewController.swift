@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
     var titleTest = "test"
-    var usersParkList: NSArray = NSArray()
+    var usersParkList: NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
@@ -51,13 +51,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feedItems.count
+        //return feedItems.count
+        return usersParkList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCellIdentifier = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier)!
-        let item: ParksModel = feedItems[indexPath.row] as! ParksModel
+        //let item: ParksModel = feedItems[indexPath.row] as! ParksModel
+        let item: ParksModel = usersParkList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
         
         return myCell
@@ -74,7 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "toAttractions"{
             let attractionVC = segue.destination as! AttractionsViewController
             let selectedIndex = listTableView.indexPathForSelectedRow?.row
-            selectedPark = feedItems[selectedIndex!] as! ParksModel
+            //selectedPark = feedItems[selectedIndex!] as! ParksModel
+            selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
             
@@ -88,14 +91,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func unwindToParkList(sender: UIStoryboardSegue) {
         
-//        if let sourceViewController = sender.source as? CityListTableController, let newCity = sourceViewController.newCity {
-//            
-//            
-//        }
-        
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
-            usersParkList.adding(newPark)
+            usersParkList.add(newPark)
+            print(newPark.name)
+            self.listTableView.reloadData()
         }
+        
        
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource {
+class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var parkArray:NSArray = NSArray()
     var selectedPark: ParksModel?
@@ -24,6 +24,7 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
         super.viewDidLoad()
         searchTextFeild.becomeFirstResponder()
         self.searchTextFeild.delegate = self
+        self.resultsTableView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -37,18 +38,8 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
         }
         print(searchedParksList.count)
-        
-        for i in 0..<searchedParksList.count {
-            let park: ParksModel = searchedParksList[i] as! ParksModel
-            print(park.name)
-        }
-        //self.resultsTableView.reloadData()
-        for i in 0..<searchedParksList.count {
-            let park: ParksModel = searchedParksList[i] as! ParksModel
-            print(park.name)
-            //let newIndexPath = IndexPath(row: i, section: 0)
-            //resultsTableView.insertRows(at: [newIndexPath], with: .automatic)
-        }
+        self.resultsTableView.reloadData()
+       
         return false
     }
     
@@ -66,6 +57,7 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier)!
         let item: ParksModel = searchedParksList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
+        print(item.name)
         return myCell
     }
     
