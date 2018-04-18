@@ -55,6 +55,7 @@ class DataModel: NSObject, URLSessionDataDelegate {
                 let park = ParksModel()
                 park.parkID = Int(jsonElement["id"] as! String)!
                 park.name = jsonElement["Name"] as! String
+                park.location = jsonElement["Location"] as! String
                 //park.longitude = Double(jsonElement["longitude"] as! String)!
                 //park.latitude = Double(jsonElement["latitude"] as! String)!
         

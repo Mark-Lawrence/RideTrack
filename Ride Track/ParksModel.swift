@@ -12,15 +12,17 @@ class ParksModel: NSObject {
 
     var parkID: Int!
     var name: String!
+    var location: String!
     var latitude: Double!
     var longitude: Double!
     
     override init() {
     }
     
-    init(parkID: Int, name: String, latitude: Double, longitude: Double) {
+    init(parkID: Int, name: String, location: String, latitude: Double, longitude: Double) {
         self.parkID = parkID
         self.name = name
+        self.location = location
         self.latitude = latitude
         self.longitude = longitude
     }

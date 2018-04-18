@@ -37,6 +37,11 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
                 print("Match! \(park.name) ")
                 searchedParksList.add(park)
             }
+            
+            if park.location.caseInsensitiveCompare(searchTextFeild.text!) == ComparisonResult.orderedSame{
+                print("Match! \(park.name) ")
+                searchedParksList.add(park)
+            }
         }
         print(searchedParksList.count)
         self.resultsTableView.reloadData()
