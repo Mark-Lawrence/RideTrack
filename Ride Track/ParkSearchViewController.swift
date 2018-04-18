@@ -32,7 +32,8 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
         print(parkArray.count)
         for i in 0..<parkArray.count {
             let park: ParksModel = parkArray[i] as! ParksModel
-            if searchTextFeild.text == park.name{
+           // if searchTextFeild.text == park.name{
+            if(park.name.caseInsensitiveCompare(searchTextFeild.text!) == ComparisonResult.orderedSame){
                 print("Match! \(park.name) ")
                 searchedParksList.add(park)
             }
