@@ -18,12 +18,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
     var titleTest = "test"
+    var usersParkList: NSArray = NSArray()
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
         self.listTableView.delegate = self
         self.listTableView.dataSource = self
+        
+        print(usersParkList.count)
+        if usersParkList.count != 0{
+            print(usersParkList[usersParkList.count - 1])
+        }
+        else{
+            print("user parks list is empty")
+        }
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
@@ -70,6 +79,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             attractionVC.parkID = selectedPark.parkID
             
         }
+        
+        if segue.identifier == "toSearch"{
+            let searchVC = segue.destination as! ParkSearchViewController
+            searchVC.parkArray = feedItems
+        }
+    }
+    
+    @IBAction func unwindToParkList(sender: UIStoryboardSegue) {
+        
+//        if let sourceViewController = sender.source as? CityListTableController, let newCity = sourceViewController.newCity {
+//            
+//            
+//        }
+        
+        if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
+            usersParkList.adding(newPark)
+        }
+       
     }
     
     
