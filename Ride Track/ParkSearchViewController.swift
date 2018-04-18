@@ -29,11 +29,11 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchedParksList.removeAllObjects()
         print(parkArray.count)
         for i in 0..<parkArray.count {
             let park: ParksModel = parkArray[i] as! ParksModel
-           // if searchTextFeild.text == park.name{
-            if(park.name.caseInsensitiveCompare(searchTextFeild.text!) == ComparisonResult.orderedSame){
+            if (park.name.lowercased().range(of: searchTextFeild.text!.lowercased()) != nil){
                 print("Match! \(park.name) ")
                 searchedParksList.add(park)
             }
