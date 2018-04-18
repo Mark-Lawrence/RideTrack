@@ -8,6 +8,8 @@
 
 import UIKit
 
+//Test the sync
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol {
 
     @IBOutlet weak var listTableView: UITableView!
@@ -16,12 +18,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
     var titleTest = "test"
+    var usersParkList: NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
         self.listTableView.delegate = self
         self.listTableView.dataSource = self
+        
+        print(usersParkList.count)
+        if usersParkList.count != 0{
+            print(usersParkList[usersParkList.count - 1])
+        }
+        else{
+            print("user parks list is empty")
+        }
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
@@ -40,13 +51,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feedItems.count
+        //return feedItems.count
+        return usersParkList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCellIdentifier = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier)!
-        let item: ParksModel = feedItems[indexPath.row] as! ParksModel
+        //let item: ParksModel = feedItems[indexPath.row] as! ParksModel
+        let item: ParksModel = usersParkList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
         
         return myCell
@@ -63,12 +76,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "toAttractions"{
             let attractionVC = segue.destination as! AttractionsViewController
             let selectedIndex = listTableView.indexPathForSelectedRow?.row
-            selectedPark = feedItems[selectedIndex!] as! ParksModel
-            print(attractionVC.parkID)
+            //selectedPark = feedItems[selectedIndex!] as! ParksModel
+            selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
             
         }
+        
+        if segue.identifier == "toSearch"{
+            let searchVC = segue.destination as! ParkSearchViewController
+            searchVC.parkArray = feedItems
+        }
+    }
+    
+    @IBAction func unwindToParkList(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
+            usersParkList.add(newPark)
+            print(newPark.name)
+            self.listTableView.reloadData()
+        }
+        
+       
     }
     
     

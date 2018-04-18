@@ -23,7 +23,7 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         parkLabel.text = titleName
         self.attractionsTableView.delegate = self
         self.attractionsTableView.dataSource = self
-        
+        print(parkID)
         let urlPath = "http://www.beingpositioned.com/theparksman/attractiondbservice.php?parkid=\(parkID)"
         
         let dataModel = DataModel()
