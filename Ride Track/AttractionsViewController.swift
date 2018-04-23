@@ -17,6 +17,8 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
     var feedItems: NSArray = NSArray()
     var selectedAttraction: AttractionsModel = AttractionsModel()
     var parkID = 0
+    var userAttractionDatabase: [UserAttraction]!
+    let green = UIColor(red: 120.0/255.0, green: 205.0/255.0, blue: 80.0/255.0, alpha: 1.0).cgColor as CGColor
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,12 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         let item: AttractionsModel = feedItems[indexPath.row] as! AttractionsModel
         myCell.textLabel!.text = item.name
         
+        //I don't know if this would be the most effiecent way to check if the user has been on the ride?
+        for i in 0..<userAttractionDatabase.count {
+            if userAttractionDatabase[i].attractionID == indexPath.row{
+                myCell.layer.backgroundColor = green
+            }
+        }
         return myCell
     }
 

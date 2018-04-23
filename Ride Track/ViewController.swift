@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var parkID = 2
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
+    var userAttractionDatabase: [[UserAttraction]] = [[UserAttraction(attractionID: 4, parkID: 32), UserAttraction(attractionID: 2, parkID: 32)],[UserAttraction(attractionID: 1, parkID: 33)]]
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
@@ -79,7 +80,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
-            
+            for i in 0..<userAttractionDatabase.count {
+                if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
+                    print("match!")
+                    attractionVC.userAttractionDatabase = userAttractionDatabase[i]
+                }
+            }
         }
         
         if segue.identifier == "toSearch"{
@@ -92,7 +98,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
             usersParkList.add(newPark)
-            print(newPark.name)
+            print(newPark.parkID)
             self.listTableView.reloadData()
         }
         

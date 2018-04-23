@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F160B402086F87900B4037F /* ParkSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F160B3F2086F87900B4037F /* ParkSearchViewController.swift */; };
+		5F74C24A208E6CA400C71FD4 /* UserAttraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74C249208E6CA400C71FD4 /* UserAttraction.swift */; };
 		5F75594A2082B0E10060CED5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559492082B0E10060CED5 /* AppDelegate.swift */; };
 		5F75594C2082B0E10060CED5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75594B2082B0E10060CED5 /* ViewController.swift */; };
 		5F75594F2082B0E10060CED5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F75594D2082B0E10060CED5 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		5F160B3F2086F87900B4037F /* ParkSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkSearchViewController.swift; sourceTree = "<group>"; };
+		5F74C249208E6CA400C71FD4 /* UserAttraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAttraction.swift; sourceTree = "<group>"; };
 		5F7559462082B0E10060CED5 /* Ride Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ride Track.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F7559492082B0E10060CED5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F75594B2082B0E10060CED5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				5F75594D2082B0E10060CED5 /* Main.storyboard */,
 				5F7559792082B2E50060CED5 /* DataModel.swift */,
 				5F7559772082B1D60060CED5 /* AttractionsModel.swift */,
+				5F74C249208E6CA400C71FD4 /* UserAttraction.swift */,
 				5F75597F2083D40E0060CED5 /* ParksModel.swift */,
 				5F7559502082B0E80060CED5 /* Assets.xcassets */,
 				5F7559522082B0E80060CED5 /* LaunchScreen.storyboard */,
@@ -278,6 +281,7 @@
 				5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */,
 				5F7559782082B1D60060CED5 /* AttractionsModel.swift in Sources */,
 				5F7559802083D40E0060CED5 /* ParksModel.swift in Sources */,
+				5F74C24A208E6CA400C71FD4 /* UserAttraction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
