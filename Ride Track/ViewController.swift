@@ -18,7 +18,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var parkID = 2
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
-    var userAttractionDatabase: [[UserAttraction]] = [[UserAttraction(attractionID: 4, parkID: 32), UserAttraction(attractionID: 2, parkID: 32)],[UserAttraction(attractionID: 1, parkID: 33)]]
+    //First entry in the array will always be just the parkID? Not ideal
+    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 2, parkID: 31), UserAttraction(rideID: 3, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)]]
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
@@ -34,6 +35,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("user parks list is empty")
         }
         
+        
+        
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
         let dataModel = DataModel()
@@ -47,6 +50,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func itemsDownloaded(items: NSArray) {
         feedItems = items
+        for i in 0..<userAttractionDatabase.count{
+            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+        }
         self.listTableView.reloadData()
     }
     
@@ -80,11 +86,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
-            for i in 0..<userAttractionDatabase.count {
-                if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
-                    print("match!")
-                    attractionVC.userAttractionDatabase = userAttractionDatabase[i]
+            if userAttractionDatabase != nil{
+                for i in 0..<userAttractionDatabase.count {
+                    if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
+                        print("match!")
+                        attractionVC.userAttractionDatabase = userAttractionDatabase[i]
+                    }
+                    else{
+                        print("never been to this park yet")
+                    }
                 }
+            }
+            else{
+                print("array is empty")
             }
         }
         
@@ -98,12 +112,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
             usersParkList.add(newPark)
-            print(newPark.parkID)
+            userAttractionDatabase.append([UserAttraction(parkID: newPark.parkID)])
+            printUserDatabase(userDatabase: userAttractionDatabase)
             self.listTableView.reloadData()
         }
-        
-       
     }
+    
+    func printUserDatabase(userDatabase: [[UserAttraction]]) {
+        print("Current user database: \n")
+        for i in 0..<userDatabase.count{
+            //Kind of funcky, but the first entry will always just be the parkID? I don't know how good of an idea this is...
+            print("\nPark ID: \(userDatabase[i][0].parkID):\n")
+            for j in 1..<userDatabase[i].count{
+                print("RideID: \(userDatabase[i][j].rideID)")
+            }
+        }
+    }
+
     
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

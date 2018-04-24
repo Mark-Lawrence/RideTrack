@@ -14,6 +14,7 @@ class AttractionsModel: NSObject {
     var name: String!
     var parkID: Int!
     var active: Bool!
+    var inUserList: Bool!
     
     override init() {
         
