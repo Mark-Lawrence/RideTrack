@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 2, parkID: 31), UserAttraction(rideID: 3, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)]]
+    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 2, parkID: 31), UserAttraction(rideID: 3, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)], [UserAttraction(parkID: 1)]]
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
@@ -53,6 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for i in 0..<userAttractionDatabase.count{
             usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
+        printUserDatabase()
         self.listTableView.reloadData()
     }
     
@@ -113,20 +114,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
             usersParkList.add(newPark)
             userAttractionDatabase.append([UserAttraction(parkID: newPark.parkID)])
-            printUserDatabase(userDatabase: userAttractionDatabase)
+            printUserDatabase()
             self.listTableView.reloadData()
         }
     }
     
-    func printUserDatabase(userDatabase: [[UserAttraction]]) {
-        print("Current user database: \n")
-        for i in 0..<userDatabase.count{
+    func printUserDatabase() {
+        var stringToPrint = "Current user database:"
+        for i in 0..<userAttractionDatabase.count{
             //Kind of funcky, but the first entry will always just be the parkID? I don't know how good of an idea this is...
-            print("\nPark ID: \(userDatabase[i][0].parkID):\n")
-            for j in 1..<userDatabase[i].count{
-                print("RideID: \(userDatabase[i][j].rideID)")
+            stringToPrint += "\n\nPark ID: \(userAttractionDatabase[i][0].parkID!):\n"
+            for j in 1..<userAttractionDatabase[i].count{
+                stringToPrint += "RideID: \(userAttractionDatabase[i][j].rideID!)  "
             }
         }
+        print(stringToPrint)
     }
 
     
