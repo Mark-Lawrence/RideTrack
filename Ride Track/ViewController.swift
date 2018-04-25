@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 2, parkID: 31), UserAttraction(rideID: 3, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)], [UserAttraction(parkID: 1)]]
+    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 4, parkID: 31), UserAttraction(rideID: 8, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)], [UserAttraction(parkID: 1)]]
     
     override func viewDidLoad() {
         
