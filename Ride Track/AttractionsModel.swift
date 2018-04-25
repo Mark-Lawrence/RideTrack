@@ -25,7 +25,12 @@ class AttractionsModel: NSObject {
         self.name = name
         self.parkID = parkID
         self.active = active
+    
     }
+    init(attractionID: Int){
+        self.attractionID = attractionID
+    }
+    
     
     override var description: String{
         return "Attraction name: \(name), Park ID: \(parkID)"
