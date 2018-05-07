@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31), UserAttraction(rideID: 4, parkID: 31), UserAttraction(rideID: 8, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 70, parkID: 32)]]
     
     override func viewDidLoad() {
+        
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
         self.listTableView.delegate = self
@@ -44,12 +45,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func itemsDownloaded(items: NSArray) {
         feedItems = items
+        
+        //Adds parks the user has already saved to the table list
         for i in 0..<userAttractionDatabase.count{
             
             //Needs to be changed to match parkID, not index?
@@ -84,6 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
         if segue.identifier == "toAttractions"{
             let attractionVC = segue.destination as! AttractionsViewController
             let selectedIndex = listTableView.indexPathForSelectedRow?.row
@@ -131,6 +133,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             stringToPrint += "\n\nPark ID: \(userAttractionDatabase[i][0].parkID!):\n"
             for j in 1..<userAttractionDatabase[i].count{
                 stringToPrint += "RideID: \(userAttractionDatabase[i][j].rideID!)  "
+            }
+            if userAttractionDatabase[i].count == 1{
+                stringToPrint += "Empty"
             }
         }
         print(stringToPrint)
