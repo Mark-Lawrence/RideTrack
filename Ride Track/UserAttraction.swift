@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import CoreData
+import Foundation
 
 class UserAttraction: NSObject {
     //Should these iclude just ID numbers or the actual AttractionsModel and ParksModel classes?
 
     //Each time a new park is added, a new entry gets added to the 2D array that contains all rides in the park. When a ride is checked, the bool becomes true, else, default to false
+    var UserAttractions: [NSManagedObject] = []
     var rideID: Int!
     var parkID: Int!
+    
+    func getContext() -> NSManagedObjectContext {
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return managedContext
+    }
     
     override init() {
     }
@@ -27,6 +35,92 @@ class UserAttraction: NSObject {
     init(parkID: Int) {
         self.parkID = parkID
     }
-
+    /**
+     * Insert a new record into the database using NSManagedObjectContext
+     *
+     * @param noteTitle the note title to be inserted
+     * @param noteContent the note content to be inserted
+     * @return noteId the unique Note Id
+     */
+    func insert(rideID: Int, parkID: Int) -> String {
+        
+        // Get NSManagedObjectContext
+        let managedContext = getContext()
+        
+        let entity = NSEntityDescription.entity(forEntityName: "UserAttraction",
+                                                in: managedContext)!
+        
+        let myAttraction = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        // Set the Note Id
+        let newUserAttraction = NSUUID().uuidString
+        myAttraction.setValue(NSDate(), forKeyPath: "creationDate")
+        print("New note being created: \(newUserAttraction)")
+        
+      //  UserAttraction.setValue(newNoteId, forKeyPath: "noteId")
+        myAttraction.setValue(rideID, forKeyPath: "rideID")
+        myAttraction.setValue(parkID, forKeyPath: "parkID")
+        let Attraction: RideTrack = RideTrack ()
+        
+        do {
+            try managedContext.save()
+            UserAttractions.append(myAttraction)
+        } catch let error as NSError {
+            print("Could not save note. \(error), \(error.userInfo)")
+        }
+        print("New Note Saved : \(newUserAttraction)")
+        return newUserAttraction
+    }
     
+    /**
+     * Update an existing Note using NSManagedObjectContext
+     * @param noteId the unique identifier for this note
+     * @param noteTitle the note title to be updated
+     * @param noteContent the note content to be updated
+     */
+    func update(rideID: String, parkID: String)  {
+        
+        // Get NSManagedObjectContext
+        let managedContext = getContext()
+        
+        let entity = NSEntityDescription.entity(forEntityName: "UserAttraction",
+                                                in: managedContext)!
+        
+        let myAttraction = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        myAttraction.setValue(rideID, forKeyPath: "rideID")
+        myAttraction.setValue(parkID, forKeyPath: "parkID")
+        myAttraction.setValue(NSDate(), forKeyPath: "updatedDate")
+        
+        do {
+            try managedContext.save()
+            UserAttractions.append(myAttraction)
+        } catch let error as NSError {
+            print("Could not save note. \(error), \(error.userInfo)")
+        }
+       // print("Updated note with NoteId: \(noteId)")
+    }
+    
+    /**
+     * Delete note using NSManagedObjectContext and NSManagedObject
+     * @param managedObjectContext the managed context for the note to be deleted
+     * @param managedObj the core data managed object for note to be deleted
+     * @param noteId the noteId to be delete
+     */
+    public func delete(managedObjectContext: NSManagedObjectContext, managedObj: NSManagedObject)  {
+        let context = managedObjectContext
+        context.delete(managedObj)
+        
+        do {
+            try context.save()
+            //print("Deleted local NoteId: \(noteId)")
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved local delete error \(nserror), \(nserror.userInfo)")
+        }
+    }
 }
+
+
