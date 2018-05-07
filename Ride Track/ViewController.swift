@@ -13,8 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var listTableView: UITableView!
     
-    //Mark is back to leave some messages
-    
+//removed
     var feedItems: NSArray = NSArray()
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
