@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreData
+import Foundation
 
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
 
     @IBOutlet weak var listTableView: UITableView!
     
@@ -20,7 +22,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31), UserAttraction(rideID: 4, parkID: 31), UserAttraction(rideID: 8, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 70, parkID: 32)]]
+    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
+     var userAttractionProvider: UserAttractionProvider? = nil
     
     override func viewDidLoad() {
         
@@ -37,7 +40,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("user parks list is empty")
         }
         
-        
+        //Initialize Note contentProvider
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
@@ -121,7 +124,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
             usersParkList.add(newPark)
-            userAttractionDatabase.append([UserAttraction(parkID: newPark.parkID)])
+            userAttractionDatabase.append([UserAttractionProvider(parkID: newPark.parkID)])
             printUserDatabase()
             self.listTableView.reloadData()
         }

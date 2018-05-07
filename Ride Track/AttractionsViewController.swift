@@ -18,7 +18,7 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
     var parkID = 0
     //Do not like this
     var attractionListForTable: NSMutableArray = [AttractionsModel()]
-    var userAttractionDatabase: [UserAttraction]!
+    var userAttractionDatabase: [UserAttractionProvider]!
     var startOfList: Int = 0
     let green = UIColor(red: 120.0/255.0, green: 205.0/255.0, blue: 80.0/255.0, alpha: 1.0).cgColor as CGColor
     

@@ -1,5 +1,5 @@
 //
-//  UserAttraction.swift
+//  UserAttractionProviderer.swift
 //  Ride Track
 //
 //  Created by Mark Lawrence on 4/23/18.
@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class UserAttraction: NSObject {
+class UserAttractionProvider: NSObject {
     //Should these iclude just ID numbers or the actual AttractionsModel and ParksModel classes?
 
     //Each time a new park is added, a new entry gets added to the 2D array that contains all rides in the park. When a ride is checked, the bool becomes true, else, default to false
