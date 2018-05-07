@@ -20,8 +20,8 @@
 		5F75597A2082B2E50060CED5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559792082B2E50060CED5 /* DataModel.swift */; };
 		5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */; };
 		5F7559802083D40E0060CED5 /* ParksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597F2083D40E0060CED5 /* ParksModel.swift */; };
+		5FA851BF20A102B300566184 /* RideTrack.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */; };
 		98F96E9720A0DB9C005F936D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F96E9620A0DB9C005F936D /* CoreData.framework */; };
-		98F96E9A20A0DBF6005F936D /* RideTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98F96E9820A0DBF6005F936D /* RideTrack.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +61,8 @@
 		5F7559792082B2E50060CED5 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionsViewController.swift; sourceTree = "<group>"; };
 		5F75597F2083D40E0060CED5 /* ParksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksModel.swift; sourceTree = "<group>"; };
+		5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RideTrack.xcdatamodel; sourceTree = "<group>"; };
 		98F96E9620A0DB9C005F936D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		98F96E9920A0DBF6005F936D /* RideTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RideTrack.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 				5F7559502082B0E80060CED5 /* Assets.xcassets */,
 				5F7559522082B0E80060CED5 /* LaunchScreen.storyboard */,
 				5F7559552082B0E80060CED5 /* Info.plist */,
-				98F96E9820A0DBF6005F936D /* RideTrack.xcdatamodeld */,
+				5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */,
 			);
 			path = "Ride Track";
 			sourceTree = "<group>";
@@ -289,12 +289,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98F96E9A20A0DBF6005F936D /* RideTrack.xcdatamodeld in Sources */,
 				5F75597A2082B2E50060CED5 /* DataModel.swift in Sources */,
 				5F160B402086F87900B4037F /* ParkSearchViewController.swift in Sources */,
 				5F75594C2082B0E10060CED5 /* ViewController.swift in Sources */,
 				5F75594A2082B0E10060CED5 /* AppDelegate.swift in Sources */,
 				5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */,
+				5FA851BF20A102B300566184 /* RideTrack.xcdatamodel in Sources */,
 				5F7559782082B1D60060CED5 /* AttractionsModel.swift in Sources */,
 				5F7559802083D40E0060CED5 /* ParksModel.swift in Sources */,
 				5F74C24A208E6CA400C71FD4 /* UserAttraction.swift in Sources */,
@@ -471,7 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y48L6965QA;
+				DEVELOPMENT_TEAM = PFP4CHD9U5;
 				INFOPLIST_FILE = "Ride Track/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -489,7 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y48L6965QA;
+				DEVELOPMENT_TEAM = PFP4CHD9U5;
 				INFOPLIST_FILE = "Ride Track/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,19 +624,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		98F96E9820A0DBF6005F936D /* RideTrack.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				98F96E9920A0DBF6005F936D /* RideTrack.xcdatamodel */,
-			);
-			currentVersion = 98F96E9920A0DBF6005F936D /* RideTrack.xcdatamodel */;
-			path = RideTrack.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5F75593E2082B0E10060CED5 /* Project object */;
 }
