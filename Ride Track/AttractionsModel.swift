@@ -14,17 +14,18 @@ class AttractionsModel: NSObject {
     var name: String!
     var parkID: Int!
     var active: Bool!
-    var inUserList: Bool!
+    var isCheck: Bool!
     
     override init() {
         
     }
     
-    init(attractionID: Int, name: String, parkID: Int, active: Bool) {
+    init(attractionID: Int, name: String, parkID: Int, active: Bool, isCheck: Bool) {
         self.attractionID = attractionID
         self.name = name
         self.parkID = parkID
         self.active = active
+        self.isCheck = isCheck
     
     }
     init(attractionID: Int){
@@ -33,6 +34,6 @@ class AttractionsModel: NSObject {
     
     
     override var description: String{
-        return "Attraction name: \(name), Park ID: \(parkID)"
+        return "Attraction name: \(name)!, Park ID: \(parkID)!"
     }
 }

@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31) ,UserAttraction(rideID: 4, parkID: 31), UserAttraction(rideID: 8, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 2, parkID: 32)], [UserAttraction(parkID: 1)]]
+    var userAttractionDatabase: [[UserAttraction]]! = [[UserAttraction(parkID: 31), UserAttraction(rideID: 4, parkID: 31), UserAttraction(rideID: 8, parkID: 31)],[UserAttraction(parkID: 32) ,UserAttraction(rideID: 70, parkID: 32)]]
     
     override func viewDidLoad() {
         listTableView.isUserInteractionEnabled = true
@@ -51,6 +51,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func itemsDownloaded(items: NSArray) {
         feedItems = items
         for i in 0..<userAttractionDatabase.count{
+            
+            //Needs to be changed to match parkID, not index?
+            //**MARK FIX THIS***
             usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
         printUserDatabase()
@@ -69,6 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let item: ParksModel = usersParkList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
         
+
         return myCell
     }
 
@@ -91,6 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
                         print("match!")
+                       // attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                         attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                     }
                     else{

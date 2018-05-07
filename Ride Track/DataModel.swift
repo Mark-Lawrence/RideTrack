@@ -58,17 +58,17 @@ class DataModel: NSObject, URLSessionDataDelegate {
                 park.location = jsonElement["Location"] as! String
                 //park.longitude = Double(jsonElement["longitude"] as! String)!
                 //park.latitude = Double(jsonElement["latitude"] as! String)!
-        
+                
                 dataBaseData.add(park)
                 
             }
             if dataBase == "attractions"{
                 let attraction = AttractionsModel()
-                attraction.attractionID = jsonElement["rideID"] as? Int
+                attraction.attractionID = Int (jsonElement["rideID"] as! String)
                 attraction.name = jsonElement["Name"] as? String
-                attraction.parkID = jsonElement["ParkID"] as? Int
+                attraction.parkID = Int (jsonElement["ParkID"] as! String)
                 attraction.active = jsonElement["active"] as? Bool
-                
+                attraction.isCheck = false
                 dataBaseData.add(attraction)
             }
         }

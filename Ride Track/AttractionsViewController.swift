@@ -14,13 +14,12 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var parkLabel: UILabel!
     
     var titleName = ""
-    var feedItems: NSArray = NSArray()
-    var selectedAttraction: AttractionsModel = AttractionsModel()
+    var tempAttraction: AttractionsModel = AttractionsModel()
     var parkID = 0
     //Do not like this
-    var AttractionList: NSMutableArray = NSMutableArray()
-    var userAttractionList: NSMutableArray = NSMutableArray()
+    var attractionListForTable: NSMutableArray = [AttractionsModel()]
     var userAttractionDatabase: [UserAttraction]!
+    var startOfList: Int = 0
     let green = UIColor(red: 120.0/255.0, green: 205.0/255.0, blue: 80.0/255.0, alpha: 1.0).cgColor as CGColor
     
     override func viewDidLoad() {
@@ -32,7 +31,7 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         let urlPath = "http://www.beingpositioned.com/theparksman/attractiondbservice.php?parkid=\(parkID)"
         
         let dataModel = DataModel()
-        print ("There are ", userAttractionDatabase.count-1, " attactions in park ", parkID)
+       // print ("There are ", feedItems.count, " attactions in park ", parkID)
         dataModel.delegate = self
 
         dataModel.downloadData(urlPath: urlPath, dataBase: "attractions")
@@ -41,49 +40,48 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func itemsDownloaded(items: NSArray) {
-        feedItems = items
-        for i in 1..<userAttractionDatabase.count{
-            userAttractionList.add(feedItems[userAttractionDatabase[i].rideID])
-        }
-        for i in 0..<feedItems.count{
-            AttractionList.add(feedItems[i])
-            if i == (feedItems.count){
-                break
-            }
-            
+//        for i in 1..<userAttractionDatabase.count{
+//            attractionListForTable.add(items[userAttractionDatabase[i].rideID])
+//        }
+        for i in 0..<items.count{
+            attractionListForTable.add(items[i])
         }
         
         self.attractionsTableView.reloadData()
-        print("THIS is the total num of attractions: ", feedItems.count)
-        for j in 0..<feedItems.count{
-            for i in 1..<userAttractionDatabase.count{ //THIS DOESNT WORK WHEN THERE ARE NO ATTRACTIONS AT A PARK
+        
+        startOfList = (items.firstObject as! AttractionsModel).attractionID
+        print ("This is where the list starts: ", startOfList, "There are this many total rides: ", items.count)
+
+        //print("\n \(items[0] as! AttractionsModel).attractionID)")
+        for j in startOfList..<items.count+startOfList {
+            for i in 1..<userAttractionDatabase.count{
                 if (userAttractionDatabase[i].rideID == j){
                     print ("We have ridden ride # ", userAttractionDatabase[i].rideID!)
-                    //make array of rides ridden, and remove them from feedItems so they go on the bottom
-                    AttractionList.remove(feedItems[j])
+                    print ("j is ", j)
+                    (attractionListForTable[j-startOfList+1] as! AttractionsModel).isCheck = true
                     break
                 }
             }
         }
+        attractionListForTable.removeObject(at: 0)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AttractionList.count-userAttractionList.count //used to be feedItem
+        return attractionListForTable.count-1//used to be feedItem
     }//TO MAKE IT SHOW SAVED ATTRACTIONS, MAKE THE RESTURN userAttractionList.count
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCellIdentifier = "attractionCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier)!
-
-       // let item: AttractionsModel = userAttractionList[indexPath.row] as! AttractionsModel //THIS SHOWS THE SAVED ATTRACTIONS**********************
-        let item: AttractionsModel = AttractionList[indexPath.row] as! AttractionsModel //THIS WORKS FOR THE NOT COMPLETED ATTRACTION
+        let item: AttractionsModel = attractionListForTable[indexPath.row] as! AttractionsModel
+        if ((attractionListForTable[indexPath.row] as! AttractionsModel).isCheck){
+             myCell.textLabel?.textColor = UIColor.green
+        }
+        else{
+            myCell.textLabel?.textColor = UIColor.black
+        }
         myCell.textLabel!.text = item.name
-        myCell.textLabel?.textColor = UIColor.green
         
-    
-        myCell.textLabel!.text = item.name
-                //I don't know if this would be the most effiecent way to check if the user has been on the ride?
-       
         return myCell
     }
 

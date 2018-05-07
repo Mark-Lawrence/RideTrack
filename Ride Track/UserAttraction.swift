@@ -21,6 +21,7 @@ class UserAttraction: NSObject {
     init(rideID: Int, parkID: Int) {
         self.rideID = rideID
         self.parkID = parkID
+        
     }
     
     init(parkID: Int) {
