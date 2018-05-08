@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var parkID = 2
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
+    var park = ParksModel()
+    var downloadIncrementor = 0
     //First entry in the array will always be just the parkID? Not ideal
     //var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
     
@@ -34,8 +36,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        self.save(parkID: 31, rideID: 4)
 //        self.save(parkID: 32, rideID: 70)
 //         self.save(parkID: 31, rideID: 8)
-        //self.save(parkID: 32, rideID: 75)
-        
+//        self.save(parkID: 32, rideID: 75)
+//        
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -89,11 +91,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         feedItems = items
         
         //Adds parks the user has already saved to the table list
-        for i in 0..<userAttractionDatabase.count{
-            
-            //Needs to be changed to match parkID, not index?
-            //**MARK FIX THIS***
-            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+//        for i in 0..<userAttractionDatabase.count{
+//
+//            //Needs to be changed to match parkID, not index?
+//            //**MARK FIX THIS***
+//            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+//        }
+        for i in 0..<feedItems.count{
+            park = feedItems[i] as! ParksModel
+            print(downloadIncrementor)
+            if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
+                if downloadIncrementor < userAttractionDatabase.count - 1{
+                    downloadIncrementor += 1
+                }
+                print(i)
+                print(park.parkID)
+                usersParkList.add(feedItems[i])
+            }
+            //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
         printUserDatabase()
         self.listTableView.reloadData()
