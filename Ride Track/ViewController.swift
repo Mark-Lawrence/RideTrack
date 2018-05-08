@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Foundation
 
+//Pushed on May 8th, 9:48
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
 
@@ -23,7 +24,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
     var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
-     var userAttractionProvider: UserAttractionProvider? = nil
+    
+     var _userAttractionProvider: UserAttractionProvider? = nil
+    // NSFetchedResultsController as an instance variable of table view controller
+    // to manage the results of a Core Data fetch request and display data to the user.
+    var _fetchedResultsController: NSFetchedResultsController<RideTrack>? = nil
+    var managedObjectContext: NSManagedObjectContext? = nil
+    
+    var userAttractions: [NSManagedObject] = []
+
+    
     
     override func viewDidLoad() {
         
@@ -40,7 +50,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("user parks list is empty")
         }
         
-        //Initialize Note contentProvider
+        managedObjectContext?.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        //Initialize Attraction contentProvider
+        _userAttractionProvider = UserAttractionProvider()
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
 
@@ -58,15 +70,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for i in 0..<userAttractionDatabase.count{
             
             //Needs to be changed to match parkID, not index?
+            
             //**MARK FIX THIS***
             usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
         printUserDatabase()
         self.listTableView.reloadData()
     }
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return feedItems.count
         return usersParkList.count
     }
     
@@ -145,6 +158,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(stringToPrint)
     }
 
+    var fetchedResultsController: NSFetchedResultsController<RideTrack> {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        let fetchRequest: NSFetchRequest<RideTrack> = RideTrack.fetchRequest()
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: false)
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        return _fetchedResultsController!
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        listTableView.beginUpdates()
+    }
     
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
