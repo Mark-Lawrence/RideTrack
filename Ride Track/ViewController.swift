@@ -31,11 +31,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         
         //Add temp data
-        self.save(parkID: 31, rideID: 4)
-        self.save(parkID: 32, rideID: 70)
-         self.save(parkID: 31, rideID: 8)
+//        self.save(parkID: 31, rideID: 4)
+//        self.save(parkID: 32, rideID: 70)
+//         self.save(parkID: 31, rideID: 8)
+        //self.save(parkID: 32, rideID: 75)
         
-        //dataMigrationToList()
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -61,6 +61,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        print("VIEW WILL APPEAR RAN")
         super.viewWillAppear(animated)
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -78,10 +80,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        dataMigrationToList()
+        
     }
     
     func itemsDownloaded(items: NSArray) {
+        dataMigrationToList()
+        
         feedItems = items
         
         //Adds parks the user has already saved to the table list
@@ -224,11 +228,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let compare1 = ride.value(forKeyPath: "parkID") as! Int
             let compare2 = rideNext.value(forKeyPath: "parkID") as! Int
             
-            if firstTime{
-                //userAttractionDatabase[parkIndex].append(UserAttractionProvider(parkID: compare1))
-                userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
-                firstTime = false
-            }
+//            if firstTime{
+//                //userAttractionDatabase[parkIndex].append(UserAttractionProvider(parkID: compare1))
+//                userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
+//                firstTime = false
+//            }
             userAttractionDatabase[parkIndex].append(UserAttractionProvider(rideID: ride.value(forKeyPath: "rideID") as! Int, parkID: compare1))
             
             if compare1 != compare2 && i != userAttractions.count - 1{
