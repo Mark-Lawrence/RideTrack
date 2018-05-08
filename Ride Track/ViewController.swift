@@ -10,6 +10,8 @@ import CoreData
 import Foundation
 
 
+//May 8th, 5:38
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var listTableView: UITableView!
@@ -33,11 +35,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         
         //Add temp data
-//        self.save(parkID: 31, rideID: 4)
-//        self.save(parkID: 32, rideID: 70)
-//         self.save(parkID: 31, rideID: 8)
-//        self.save(parkID: 32, rideID: 75)
-//        
+//        self.save(parkID: 2, rideID: 31)
+        self.save(parkID: 31, rideID: 4)
+        self.save(parkID: 32, rideID: 70)
+         self.save(parkID: 31, rideID: 8)
+        self.save(parkID: 32, rideID: 75)
+
+        
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -99,13 +103,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
         for i in 0..<feedItems.count{
             park = feedItems[i] as! ParksModel
-            print(downloadIncrementor)
             if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
                 if downloadIncrementor < userAttractionDatabase.count - 1{
                     downloadIncrementor += 1
                 }
-                print(i)
-                print(park.parkID)
+                
                 usersParkList.add(feedItems[i])
             }
             //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
@@ -149,7 +151,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //let item: ParksModel = feedItems[indexPath.row] as! ParksModel
         let item: ParksModel = usersParkList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
-        
         
         return myCell
     }
@@ -228,6 +229,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func dataMigrationToList() {
        var firstTime = true
+        print("\nPrint the migration:")
         var parkIndex = 0
         for i in 0..<userAttractions.count {
             let ride = userAttractions[i]
@@ -243,18 +245,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let compare1 = ride.value(forKeyPath: "parkID") as! Int
             let compare2 = rideNext.value(forKeyPath: "parkID") as! Int
             
-//            if firstTime{
-//                //userAttractionDatabase[parkIndex].append(UserAttractionProvider(parkID: compare1))
-//                userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
-//                firstTime = false
-//            }
+            if firstTime{
+                print("first time")
+                //userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
+                userAttractionDatabase[0] = [UserAttractionProvider(parkID: compare1)]
+                firstTime = false
+            }
             userAttractionDatabase[parkIndex].append(UserAttractionProvider(rideID: ride.value(forKeyPath: "rideID") as! Int, parkID: compare1))
+            
+            print("\(compare1), \(compare2)")
             
             if compare1 != compare2 && i != userAttractions.count - 1{
                 parkIndex += 1
                 userAttractionDatabase.append([UserAttractionProvider(parkID: compare2)])
+                //userAttractionDatabase.append([UserAttractionProvider(rideID: rideNext.value(forKeyPath: "parkID") as! Int, parkID: compare2)])
+                //i += 1
             }
         }
+//        print("Expected output:")
+//        print(userAttractionDatabase[0][0].rideID)
+//        print(userAttractionDatabase[0][1].rideID)
+//        print(userAttractionDatabase[0][2].rideID)
+//        print(userAttractionDatabase[1][0].rideID)
+//        print(userAttractionDatabase[1][1].rideID)
+//        print(userAttractionDatabase[1][2].rideID)
+        
+        
     }
     
     

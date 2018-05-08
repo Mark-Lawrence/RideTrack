@@ -60,6 +60,8 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         attractionListForTable.removeObject(at: 0)
     }
     
+    
+  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attractionListForTable.count-1//used to be feedItem
     }//TO MAKE IT SHOW SAVED ATTRACTIONS, MAKE THE RESTURN userAttractionList.count
