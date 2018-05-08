@@ -12,6 +12,7 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     var parkArray:NSArray = NSArray()
     var selectedPark: ParksModel?
+    var park = ParksModel()
     
     //A list of parks searched for, to display in results table 
     var searchedParksList: NSMutableArray = NSMutableArray()
@@ -32,7 +33,7 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
         searchedParksList.removeAllObjects()
         print(parkArray.count)
         for i in 0..<parkArray.count {
-            let park: ParksModel = parkArray[i] as! ParksModel
+            park = parkArray[i] as! ParksModel
             if (park.name.lowercased().range(of: searchTextFeild.text!.lowercased()) != nil){
                 print("Match! \(park.name) ")
                 searchedParksList.add(park)

@@ -21,9 +21,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
     var titleTest = "test"
+    var park = ParksModel()
     var usersParkList: NSMutableArray = NSMutableArray()
+    var downloadIncrementor = 0
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
+    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32), UserAttractionProvider(rideID: 70, parkID: 32)], [UserAttractionProvider(parkID: 43)]]
     
      var _userAttractionProvider: UserAttractionProvider? = nil
     // NSFetchedResultsController as an instance variable of table view controller
@@ -67,13 +69,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         feedItems = items
         
         //Adds parks the user has already saved to the table list
-        for i in 0..<userAttractionDatabase.count{
-            
-            //Needs to be changed to match parkID, not index?
-            
+//        for i in 0..<userAttractionDatabase.count{
+//
+//            //Needs to be changed to match parkID, not index?
+//
+//            //**MARK FIX THIS***
+//            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+//        }
+        
+        for i in 0..<feedItems.count{
             //**MARK FIX THIS***
-            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+             park = feedItems[i] as! ParksModel
+            print(downloadIncrementor)
+            if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
+                if downloadIncrementor < userAttractionDatabase.count - 1{
+                    downloadIncrementor += 1
+                }
+                print(i)
+                print(park.parkID)
+                usersParkList.add(feedItems[i])
+            }
+            //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
+        
         printUserDatabase()
         self.listTableView.reloadData()
     }
@@ -169,7 +187,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
