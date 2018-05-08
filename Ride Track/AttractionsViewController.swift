@@ -40,9 +40,6 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func itemsDownloaded(items: NSArray) {
-//        for i in 1..<userAttractionDatabase.count{
-//            attractionListForTable.add(items[userAttractionDatabase[i].rideID])
-//        }
         for i in 0..<items.count{
             attractionListForTable.add(items[i])
         }
@@ -50,14 +47,11 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         self.attractionsTableView.reloadData()
         
         startOfList = (items.firstObject as! AttractionsModel).attractionID
-        print ("This is where the list starts: ", startOfList, "There are this many total rides: ", items.count)
 
-        //print("\n \(items[0] as! AttractionsModel).attractionID)")
-        for j in startOfList..<items.count+startOfList {
+        for j in startOfList..<items.count+startOfList { 
             for i in 1..<userAttractionDatabase.count{
                 if (userAttractionDatabase[i].rideID == j){
                     print ("We have ridden ride # ", userAttractionDatabase[i].rideID!)
-                    print ("j is ", j)
                     (attractionListForTable[j-startOfList+1] as! AttractionsModel).isCheck = true
                     break
                 }
