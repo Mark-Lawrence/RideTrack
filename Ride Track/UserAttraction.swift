@@ -5,6 +5,7 @@
 //  Created by Mark Lawrence on 4/23/18.
 //  Copyright © 2018 Mark Lawrence. All rights reserved.
 //
+//Pushed on May 8th, 10:14
 
 import UIKit
 import CoreData
@@ -14,7 +15,7 @@ class UserAttractionProvider: NSObject {
     //Should these iclude just ID numbers or the actual AttractionsModel and ParksModel classes?
 
     //Each time a new park is added, a new entry gets added to the 2D array that contains all rides in the park. When a ride is checked, the bool becomes true, else, default to false
-    var UserAttractions: [NSManagedObject] = []
+    var userAttractionDatabase: [NSManagedObject] = []
     var rideID: Int!
     var parkID: Int!
     
@@ -38,8 +39,8 @@ class UserAttractionProvider: NSObject {
     /**
      * Insert a new record into the database using NSManagedObjectContext
      *
-     * @param noteTitle the note title to be inserted
-     * @param noteContent the note content to be inserted
+     * @param rideID the ride ID inserted
+     * @param parkID the park ID to be inserted
      * @return noteId the unique Note Id
      */
     func insert(rideID: Int, parkID: Int) -> String {
@@ -50,27 +51,27 @@ class UserAttractionProvider: NSObject {
         let entity = NSEntityDescription.entity(forEntityName: "UserAttraction",
                                                 in: managedContext)!
         
-        let myAttraction = NSManagedObject(entity: entity,
+        let newPark = NSManagedObject(entity: entity,
                                      insertInto: managedContext)
         
         // Set the Note Id
-        let newUserAttraction = NSUUID().uuidString
-        myAttraction.setValue(NSDate(), forKeyPath: "creationDate")
-        print("New note being created: \(newUserAttraction)")
+        let newParkID = NSUUID().uuidString
+        newPark.setValue(NSDate(), forKeyPath: "creationDate")
+        print("New note being created: \(newParkID)")
         
       //  UserAttraction.setValue(newNoteId, forKeyPath: "noteId")
-        myAttraction.setValue(rideID, forKeyPath: "rideID")
-        myAttraction.setValue(parkID, forKeyPath: "parkID")
+        newPark.setValue(rideID, forKeyPath: "rideID")
+        newPark.setValue(parkID, forKeyPath: "parkID")
         let Attraction: RideTrack = RideTrack ()
         
         do {
             try managedContext.save()
-            UserAttractions.append(myAttraction)
+            userAttractionDatabase.append(newPark)
         } catch let error as NSError {
             print("Could not save note. \(error), \(error.userInfo)")
         }
-        print("New Note Saved : \(newUserAttraction)")
-        return newUserAttraction
+        print("New park Saved : \(newParkID)")
+        return newParkID
     }
     
     /**
@@ -96,7 +97,7 @@ class UserAttractionProvider: NSObject {
         
         do {
             try managedContext.save()
-            UserAttractions.append(myAttraction)
+            userAttractionDatabase.append(myAttraction)
         } catch let error as NSError {
             print("Could not save note. \(error), \(error.userInfo)")
         }

@@ -45,7 +45,7 @@ class ParkSearchViewController: UIViewController, UITextFieldDelegate, UITableVi
         }
         print(searchedParksList.count)
         self.resultsTableView.reloadData()
-       
+       self.view.endEditing(true)
         return false
     }
     
