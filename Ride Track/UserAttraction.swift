@@ -5,7 +5,7 @@
 //  Created by Mark Lawrence on 4/23/18.
 //  Copyright © 2018 Mark Lawrence. All rights reserved.
 //
-//Pushed on May 8th, 10:14
+
 
 import UIKit
 import CoreData
@@ -15,7 +15,7 @@ class UserAttractionProvider: NSObject {
     //Should these iclude just ID numbers or the actual AttractionsModel and ParksModel classes?
 
     //Each time a new park is added, a new entry gets added to the 2D array that contains all rides in the park. When a ride is checked, the bool becomes true, else, default to false
-    var userAttractionDatabase: [NSManagedObject] = []
+    var userAttractions: [NSManagedObject] = []
     var rideID: Int!
     var parkID: Int!
     
@@ -48,7 +48,7 @@ class UserAttractionProvider: NSObject {
         // Get NSManagedObjectContext
         let managedContext = getContext()
         
-        let entity = NSEntityDescription.entity(forEntityName: "UserAttraction",
+        let entity = NSEntityDescription.entity(forEntityName: "RideTrack",
                                                 in: managedContext)!
         
         let newPark = NSManagedObject(entity: entity,
@@ -57,7 +57,7 @@ class UserAttractionProvider: NSObject {
         // Set the Note Id
         let newParkID = NSUUID().uuidString
         newPark.setValue(NSDate(), forKeyPath: "creationDate")
-        print("New note being created: \(newParkID)")
+        print("New park being created: \(newParkID)")
         
       //  UserAttraction.setValue(newNoteId, forKeyPath: "noteId")
         newPark.setValue(rideID, forKeyPath: "rideID")
@@ -66,7 +66,7 @@ class UserAttractionProvider: NSObject {
         
         do {
             try managedContext.save()
-            userAttractionDatabase.append(newPark)
+            userAttractions.append(newPark)
         } catch let error as NSError {
             print("Could not save note. \(error), \(error.userInfo)")
         }
@@ -97,7 +97,7 @@ class UserAttractionProvider: NSObject {
         
         do {
             try managedContext.save()
-            userAttractionDatabase.append(myAttraction)
+            userAttractions.append(myAttraction)
         } catch let error as NSError {
             print("Could not save note. \(error), \(error.userInfo)")
         }

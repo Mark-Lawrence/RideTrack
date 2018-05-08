@@ -4,7 +4,7 @@
 //
 //  Created by Mark Lawrence on 4/14/18.
 //  Copyright © 2018 Mark Lawrence. All rights reserved.
-//
+////Pushed on May 8th, 12:45
 
 import UIKit
 import CoreData
@@ -45,11 +45,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Initialize User Attraction contentProvider
         userAttractionProvider = UserAttractionProvider()
-        
+        for i in 0 ..< userAttractions.count{
+            let rideID = userAttractions[i]
+            let rideToBePrinted = rideID.value(forKeyPath: "rideID") as? String
+            print ("The rideID is ", rideToBePrinted)
+            let parkID = userAttractions[i]
+            let IDToBePrinted = parkID.value(forKeyPath: "parkID") as? String
+            print ("\n The parkID is ", IDToBePrinted)
+        }
         let id = userAttractionProvider?.insert(rideID: 3, parkID: 8)
         ViewController.userAttractionID = id
         
-        
+/**
         let sectionInfo = fetchedResultsController.sections![0]
         let count: Int = sectionInfo.numberOfObjects
 //        for i in 0 ..<sectionInfo.numberOfObjects {
@@ -62,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             print("SAVED ITEM \(event.parkID)")
         }
-
+**/
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -91,7 +98,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
 
     }
-    
+/**
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //1
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Person")
+        
+        //3
+        do {
+            userAttractions = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+**/
     func itemsDownloaded(items: NSArray) {
         feedItems = items
         
@@ -107,7 +138,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for i in 0..<feedItems.count{
             //**MARK FIX THIS***
              park = feedItems[i] as! ParksModel
-            print(downloadIncrementor)
+            //print(downloadIncrementor)
             if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
                 if downloadIncrementor < userAttractionDatabase.count - 1{
                     downloadIncrementor += 1
@@ -202,7 +233,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         print(stringToPrint)
     }
-
+/**
     var fetchedResultsController: NSFetchedResultsController<RideTrack> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -234,7 +265,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return _fetchedResultsController!
     }
-    
+  **/
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         listTableView.beginUpdates()
     }
