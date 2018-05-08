@@ -21,11 +21,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var titleTest = "test"
     var usersParkList: NSMutableArray = NSMutableArray()
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
+    //var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
+    
+    var userAttractionDatabase: [[UserAttractionProvider]] = [[]]
+    
     var userAttractionProvider: UserAttractionProvider? = nil
     var userAttractions: [NSManagedObject] = []
     
     override func viewDidLoad() {
+        
+        //Add temp data
+        self.save(parkID: 31, rideID: 4)
+        self.save(parkID: 32, rideID: 70)
+         self.save(parkID: 31, rideID: 8)
+        
+        //dataMigrationToList()
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -46,7 +56,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let dataModel = DataModel()
         dataModel.delegate = self
-        
+
         dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
     }
@@ -58,13 +68,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
+        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: true)
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "RideTrack")
+        fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             userAttractions = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        dataMigrationToList()
     }
     
     func itemsDownloaded(items: NSArray) {
@@ -187,9 +201,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("THis is size of UserAttractions: ", userAttractions.count)
         for i in 0..<userAttractions.count {
             let person = userAttractions[i]
-            print("SAVED ITEM: \(person.value(forKeyPath: "parkID")!)")
+            print("SAVED ITEM: \(person.value(forKeyPath: "rideID")!)")
         }
         print(stringToPrint)
+    }
+    
+    
+    func dataMigrationToList() {
+       var firstTime = true
+        var parkIndex = 0
+        for i in 0..<userAttractions.count {
+            let ride = userAttractions[i]
+            var rideNext = userAttractions[i]
+            if i != userAttractions.count - 1{
+                rideNext = userAttractions[i+1]
+            }
+            else{
+                rideNext = userAttractions[i]
+            }
+            print("SAVED ITEM: \(ride.value(forKeyPath: "rideID")!)")
+            
+            let compare1 = ride.value(forKeyPath: "parkID") as! Int
+            let compare2 = rideNext.value(forKeyPath: "parkID") as! Int
+            
+            if firstTime{
+                //userAttractionDatabase[parkIndex].append(UserAttractionProvider(parkID: compare1))
+                userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
+                firstTime = false
+            }
+            userAttractionDatabase[parkIndex].append(UserAttractionProvider(rideID: ride.value(forKeyPath: "rideID") as! Int, parkID: compare1))
+            
+            if compare1 != compare2 && i != userAttractions.count - 1{
+                parkIndex += 1
+                userAttractionDatabase.append([UserAttractionProvider(parkID: compare2)])
+            }
+        }
     }
     
     
