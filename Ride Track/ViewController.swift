@@ -35,13 +35,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         
         //Add temp data
-//        self.save(parkID: 2, rideID: 31)
-        self.save(parkID: 31, rideID: 4)
-        self.save(parkID: 32, rideID: 70)
-         self.save(parkID: 31, rideID: 8)
-        self.save(parkID: 32, rideID: 75)
+        //     self.save(parkID: 105, rideID: 1)
+   /**    self.save(parkID: 112, rideID: 7)
+        self.save(parkID: 188, rideID: 73)
+        self.save(parkID: 112, rideID: 11)
+        self.save(parkID: 188, rideID: 78)
+        self.save(parkID: 138, rideID: 35)
 
-        
+   **/
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -171,6 +172,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
+            attractionVC.userAttractions = userAttractions
+            
             if userAttractionDatabase != nil{
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
@@ -204,7 +207,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.save(parkID: newPark.parkID, rideID: 0)
             print("new park saved: ", newPark.parkID)
         }
-    }
     
     func printUserDatabase() {
         var stringToPrint = "Current user database:"
@@ -290,3 +292,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //    }
 }
 
+}
