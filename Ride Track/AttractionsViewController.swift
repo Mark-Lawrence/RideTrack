@@ -45,7 +45,7 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         self.attractionsTableView.reloadData()
-        
+       
         startOfList = (items.firstObject as! AttractionsModel).attractionID
 
         for j in startOfList..<items.count+startOfList { 

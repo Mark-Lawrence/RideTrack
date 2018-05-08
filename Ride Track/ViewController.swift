@@ -4,72 +4,28 @@
 //
 //  Created by Mark Lawrence on 4/14/18.
 //  Copyright © 2018 Mark Lawrence. All rights reserved.
-////Pushed on May 8th, 12:45
-
+//  last pushed: May 8, 1:30
 import UIKit
 import CoreData
 import Foundation
 
-//Pushed on May 8th, 9:48
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
-
+    
     @IBOutlet weak var listTableView: UITableView!
     
-//removed
+    //removed
     var feedItems: NSArray = NSArray()
     var selectedPark: ParksModel = ParksModel()
     var parkID = 2
     var titleTest = "test"
-    var park = ParksModel()
     var usersParkList: NSMutableArray = NSMutableArray()
-    var downloadIncrementor = 0
-    static var userAttractionID: String?
-    
-    var userAttractionProvider: UserAttractionProvider? = nil
-    
     //First entry in the array will always be just the parkID? Not ideal
-    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32), UserAttractionProvider(rideID: 70, parkID: 32)], [UserAttractionProvider(parkID: 43)]]
-    
-     var _userAttractionProvider: UserAttractionProvider? = nil
-    // NSFetchedResultsController as an instance variable of table view controller
-    // to manage the results of a Core Data fetch request and display data to the user.
-    var _fetchedResultsController: NSFetchedResultsController<RideTrack>? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
-    
+    var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32) ,UserAttractionProvider(rideID: 70, parkID: 32)]]
+    var userAttractionProvider: UserAttractionProvider? = nil
     var userAttractions: [NSManagedObject] = []
-
-    
     
     override func viewDidLoad() {
-        
-        // Initialize User Attraction contentProvider
-        userAttractionProvider = UserAttractionProvider()
-        for i in 0 ..< userAttractions.count{
-            let rideID = userAttractions[i]
-            let rideToBePrinted = rideID.value(forKeyPath: "rideID") as? String
-            print ("The rideID is ", rideToBePrinted)
-            let parkID = userAttractions[i]
-            let IDToBePrinted = parkID.value(forKeyPath: "parkID") as? String
-            print ("\n The parkID is ", IDToBePrinted)
-        }
-        let id = userAttractionProvider?.insert(rideID: 3, parkID: 8)
-        ViewController.userAttractionID = id
-        
-/**
-        let sectionInfo = fetchedResultsController.sections![0]
-        let count: Int = sectionInfo.numberOfObjects
-//        for i in 0 ..<sectionInfo.numberOfObjects {
-//            let event = fetchedResultsController.object(at: indexPath)
-//        }
-
-        for i in 0 ..< count{
-            let indexPathNew: IndexPath = IndexPath(row: i, section: 0)
-            let event = fetchedResultsController.object(at: indexPathNew)
-            
-            print("SAVED ITEM \(event.parkID)")
-        }
-**/
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -84,78 +40,73 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("user parks list is empty")
         }
         
-        managedObjectContext?.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        //Initialize Attraction contentProvider
-        _userAttractionProvider = UserAttractionProvider()
+        //Initialize Note contentProvider
         
         let urlPath = "http://www.beingpositioned.com/theparksman/parksdbservice.php"
-
+        
         let dataModel = DataModel()
         dataModel.delegate = self
         
         dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
-        
-
     }
-/**
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
         }
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.persistentContainer.viewContext
         
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Person")
-        
-        //3
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "RideTrack")
         do {
             userAttractions = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-**/
+    
     func itemsDownloaded(items: NSArray) {
         feedItems = items
         
         //Adds parks the user has already saved to the table list
-//        for i in 0..<userAttractionDatabase.count{
-//
-//            //Needs to be changed to match parkID, not index?
-//
-//            //**MARK FIX THIS***
-//            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
-//        }
-        
-        for i in 0..<feedItems.count{
+        for i in 0..<userAttractionDatabase.count{
+            
+            //Needs to be changed to match parkID, not index?
             //**MARK FIX THIS***
-             park = feedItems[i] as! ParksModel
-            //print(downloadIncrementor)
-            if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
-                if downloadIncrementor < userAttractionDatabase.count - 1{
-                    downloadIncrementor += 1
-                }
-                print(i)
-                print(park.parkID)
-                usersParkList.add(feedItems[i])
-            }
-            //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
-        
         printUserDatabase()
         self.listTableView.reloadData()
     }
-   
+    
+    func save(parkID: Int, rideID: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "RideTrack",
+                                                in: managedContext)!
+        
+        let newPark = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        newPark.setValue(parkID, forKeyPath: "parkID")
+        newPark.setValue(rideID, forKeyPath: "rideID")
+        print("Just saved new park: ", parkID)
+        do {
+            try managedContext.save()
+            userAttractions.append(newPark)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return feedItems.count
         return usersParkList.count
     }
     
@@ -166,19 +117,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let item: ParksModel = usersParkList[indexPath.row] as! ParksModel
         myCell.textLabel!.text = item.name
         
-
+        
         return myCell
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "toAttractions"{
             let attractionVC = segue.destination as! AttractionsViewController
             let selectedIndex = listTableView.indexPathForSelectedRow?.row
@@ -190,7 +141,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
                         print("match!")
-                       // attractionVC.userAttractionDatabase = userAttractionDatabase[i]
+                        // attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                         attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                     }
                     else{
@@ -216,6 +167,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             userAttractionDatabase.append([UserAttractionProvider(parkID: newPark.parkID)])
             printUserDatabase()
             self.listTableView.reloadData()
+            self.save(parkID: newPark.parkID, rideID: 0)
+            print("new park saved: ", newPark.parkID)
         }
     }
     
@@ -231,63 +184,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 stringToPrint += "Empty"
             }
         }
+        print("THis is size of UserAttractions: ", userAttractions.count)
+        for i in 0..<userAttractions.count {
+            let person = userAttractions[i]
+            print("SAVED ITEM: \(person.value(forKeyPath: "parkID")!)")
+        }
         print(stringToPrint)
     }
-/**
-    var fetchedResultsController: NSFetchedResultsController<RideTrack> {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-        }
-        
-        let fetchRequest: NSFetchRequest<RideTrack> = RideTrack.fetchRequest()
-        
-        // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
-        
-        do {
-            try _fetchedResultsController!.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        return _fetchedResultsController!
-    }
-  **/
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        listTableView.beginUpdates()
-    }
     
     
     
-
-    
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//
-//        if (segue.identifier == "toAttractions"){
-//            let attractionVC = segue.destination as! AttractionsViewController
-//            let selectedIndex = listTableView.indexPathForSelectedRow?.row
-//            selectedPark = feedItems[selectedIndex!] as! ParksModel
-//            let name = selectedPark.name
-//            let parkID = selectedPark.parkID
-//            attractionVC.parkLabel.text = titleTest
-//            //attractionVC.parkID = parkID!
-//        }
-//    }
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //
+    //
+    //        if (segue.identifier == "toAttractions"){
+    //            let attractionVC = segue.destination as! AttractionsViewController
+    //            let selectedIndex = listTableView.indexPathForSelectedRow?.row
+    //            selectedPark = feedItems[selectedIndex!] as! ParksModel
+    //            let name = selectedPark.name
+    //            let parkID = selectedPark.parkID
+    //            attractionVC.parkLabel.text = titleTest
+    //            //attractionVC.parkID = parkID!
+    //        }
+    //    }
 }
 

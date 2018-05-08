@@ -42,7 +42,7 @@ class UserAttractionProvider: NSObject {
      * @param rideID the ride ID inserted
      * @param parkID the park ID to be inserted
      * @return noteId the unique Note Id
-     */
+ 
     func insert(rideID: Int, parkID: Int) -> String {
         
         // Get NSManagedObjectContext
@@ -122,6 +122,7 @@ class UserAttractionProvider: NSObject {
             fatalError("Unresolved local delete error \(nserror), \(nserror.userInfo)")
         }
     }
+ **/
 }
 
 
