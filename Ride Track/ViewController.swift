@@ -24,6 +24,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var park = ParksModel()
     var usersParkList: NSMutableArray = NSMutableArray()
     var downloadIncrementor = 0
+    static var userAttractionID: String?
+    
+    var userAttractionProvider: UserAttractionProvider? = nil
+    
     //First entry in the array will always be just the parkID? Not ideal
     var userAttractionDatabase: [[UserAttractionProvider]]! = [[UserAttractionProvider(parkID: 31), UserAttractionProvider(rideID: 4, parkID: 31), UserAttractionProvider(rideID: 8, parkID: 31)],[UserAttractionProvider(parkID: 32), UserAttractionProvider(rideID: 70, parkID: 32)], [UserAttractionProvider(parkID: 43)]]
     
@@ -38,6 +42,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     override func viewDidLoad() {
+        
+        // Initialize User Attraction contentProvider
+        userAttractionProvider = UserAttractionProvider()
+        
+        let id = userAttractionProvider?.insert(rideID: 3, parkID: 8)
+        ViewController.userAttractionID = id
+        
+        
+        let sectionInfo = fetchedResultsController.sections![0]
+        let count: Int = sectionInfo.numberOfObjects
+//        for i in 0 ..<sectionInfo.numberOfObjects {
+//            let event = fetchedResultsController.object(at: indexPath)
+//        }
+
+        for i in 0 ..< count{
+            let indexPathNew: IndexPath = IndexPath(row: i, section: 0)
+            let event = fetchedResultsController.object(at: indexPathNew)
+            
+            print("SAVED ITEM \(event.parkID)")
+        }
+
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -63,6 +88,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
+        
+
     }
     
     func itemsDownloaded(items: NSArray) {
@@ -211,6 +238,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         listTableView.beginUpdates()
     }
+    
+    
+    
+
+    
     
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
