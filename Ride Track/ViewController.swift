@@ -35,20 +35,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         
-        deleteRecords()
+        //deleteRecords()
         //self.delete(parkID: 105, rideID: 1)
-//        self.delete(IndexPath(item: 1, section: 0))
-//        self.delete(IndexPath(item: 4, section: 0))
+        //        self.delete(IndexPath(item: 1, section: 0))
+        //        self.delete(IndexPath(item: 4, section: 0))
         
         //Add temp data
-        self.save(parkID: 105, rideID: 1)
-        self.save(parkID: 112, rideID: 7)
-        self.save(parkID: 188, rideID: 73)
-        self.save(parkID: 112, rideID: 11)
-        self.save(parkID: 188, rideID: 78)
-        self.save(parkID: 138, rideID: 35)
-
-   **/
+//        self.save(parkID: 105, rideID: 1)
+//        self.save(parkID: 112, rideID: 7)
+//        self.save(parkID: 188, rideID: 73)
+//        self.save(parkID: 112, rideID: 11)
+//        self.save(parkID: 188, rideID: 78)
+//        self.save(parkID: 138, rideID: 35)
+//        
+        
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let dataModel = DataModel()
         dataModel.delegate = self
-
+        
         dataModel.downloadData(urlPath: urlPath, dataBase: "parks")
         
     }
@@ -104,12 +104,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         feedItems = items
         
         //Adds parks the user has already saved to the table list
-//        for i in 0..<userAttractionDatabase.count{
-//
-//            //Needs to be changed to match parkID, not index?
-//            //**MARK FIX THIS***
-//            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
-//        }
+        //        for i in 0..<userAttractionDatabase.count{
+        //
+        //            //Needs to be changed to match parkID, not index?
+        //            //**MARK FIX THIS***
+        //            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
+        //        }
         for i in 0..<feedItems.count{
             park = feedItems[i] as! ParksModel
             if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
@@ -135,7 +135,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                                 in: managedContext)!
         
         let newPark = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
+                                      insertInto: managedContext)
         
         newPark.setValue(parkID, forKeyPath: "parkID")
         newPark.setValue(rideID, forKeyPath: "rideID")
@@ -149,24 +149,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-//    func delete(_ indexPath : IndexPath) {
-//
-//        print("Deleting from... \(indexPath.row)")
-//        // To delete a task we retrieve the corresponding
-//        // object from the cell index.
-//        let task = self.fetchRequest?.object(at: indexPath)
-//
-//        // Then we use the managed object context and delete that object.
-//        self.managedContext?.delete(task!)
-//
-//        do {
-//            // And try to persist the change. If successfull
-//            // the fetched results controller will react and call the method
-//            // to reload the table view.
-//            try self.managedContext?.save()
-//        } catch {}
-//    }
-
+    //    func delete(_ indexPath : IndexPath) {
+    //
+    //        print("Deleting from... \(indexPath.row)")
+    //        // To delete a task we retrieve the corresponding
+    //        // object from the cell index.
+    //        let task = self.fetchRequest?.object(at: indexPath)
+    //
+    //        // Then we use the managed object context and delete that object.
+    //        self.managedContext?.delete(task!)
+    //
+    //        do {
+    //            // And try to persist the change. If successfull
+    //            // the fetched results controller will react and call the method
+    //            // to reload the table view.
+    //            try self.managedContext?.save()
+    //        } catch {}
+    //    }
+    
     func deleteRecords() -> Void {
         let moc = getContext()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RideTrack")
@@ -262,7 +262,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.save(parkID: newPark.parkID, rideID: 0)
             print("new park saved: ", newPark.parkID)
         }
-    
+    }
     func printUserDatabase() {
         var stringToPrint = "Current user database:"
         for i in 0..<userAttractionDatabase.count{
@@ -285,7 +285,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func dataMigrationToList() {
-       var firstTime = true
+        var firstTime = true
         print("\nPrint the migration:")
         var parkIndex = 0
         for i in 0..<userAttractions.count {
@@ -319,13 +319,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 //i += 1
             }
         }
-//        print("Expected output:")
-//        print(userAttractionDatabase[0][0].rideID)
-//        print(userAttractionDatabase[0][1].rideID)
-//        print(userAttractionDatabase[0][2].rideID)
-//        print(userAttractionDatabase[1][0].rideID)
-//        print(userAttractionDatabase[1][1].rideID)
-//        print(userAttractionDatabase[1][2].rideID)
+        //        print("Expected output:")
+        //        print(userAttractionDatabase[0][0].rideID)
+        //        print(userAttractionDatabase[0][1].rideID)
+        //        print(userAttractionDatabase[0][2].rideID)
+        //        print(userAttractionDatabase[1][0].rideID)
+        //        print(userAttractionDatabase[1][1].rideID)
+        //        print(userAttractionDatabase[1][2].rideID)
         
         
     }
@@ -347,4 +347,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //    }
 }
 
-}
