@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         
-        deleteRecords()
+        //deleteRecords()
 //        //self.delete(parkID: 105, rideID: 1)
 //        //        self.delete(IndexPath(item: 1, section: 0))
 //        //        self.delete(IndexPath(item: 4, section: 0))
