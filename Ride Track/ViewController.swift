@@ -10,8 +10,6 @@ import CoreData
 import Foundation
 
 
-//May 8th, 5:38
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var listTableView: UITableView!
@@ -32,14 +30,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var userAttractionProvider: UserAttractionProvider? = nil
     var userAttractions: [NSManagedObject] = []
     
+    var fetchRequest: NSFetchedResultsController<RideTrack>? = nil
+    var managedContext: NSManagedObjectContext? = nil
+    
     override func viewDidLoad() {
         
+        deleteRecords()
+        //self.delete(parkID: 105, rideID: 1)
+//        self.delete(IndexPath(item: 1, section: 0))
+//        self.delete(IndexPath(item: 4, section: 0))
+        
         //Add temp data
-//        self.save(parkID: 2, rideID: 31)
-        self.save(parkID: 31, rideID: 4)
-        self.save(parkID: 32, rideID: 70)
-         self.save(parkID: 31, rideID: 8)
-        self.save(parkID: 32, rideID: 75)
+        self.save(parkID: 105, rideID: 1)
+        self.save(parkID: 112, rideID: 7)
+        self.save(parkID: 188, rideID: 73)
+        self.save(parkID: 112, rideID: 11)
+        self.save(parkID: 188, rideID: 78)
+        self.save(parkID: 138, rideID: 35)
 
         
         
@@ -87,6 +94,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         
+        
+        
     }
     
     func itemsDownloaded(items: NSArray) {
@@ -120,7 +129,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let entity = NSEntityDescription.entity(forEntityName: "RideTrack",
@@ -138,6 +146,54 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+    }
+    
+    
+//    func delete(_ indexPath : IndexPath) {
+//
+//        print("Deleting from... \(indexPath.row)")
+//        // To delete a task we retrieve the corresponding
+//        // object from the cell index.
+//        let task = self.fetchRequest?.object(at: indexPath)
+//
+//        // Then we use the managed object context and delete that object.
+//        self.managedContext?.delete(task!)
+//
+//        do {
+//            // And try to persist the change. If successfull
+//            // the fetched results controller will react and call the method
+//            // to reload the table view.
+//            try self.managedContext?.save()
+//        } catch {}
+//    }
+
+    func deleteRecords() -> Void {
+        let moc = getContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RideTrack")
+        
+        let result = try? moc.fetch(fetchRequest)
+        let resultData = result as! [RideTrack]
+        
+        for object in resultData {
+            moc.delete(object)
+        }
+        
+        do {
+            try moc.save()
+            print("saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        } catch {
+            
+        }
+        
+    }
+    
+    // MARK: Get Context
+    
+    func getContext () -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
