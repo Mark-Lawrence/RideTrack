@@ -42,18 +42,30 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         // Do any additional setup after loading the view, typically from a nib.
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let alertController = UIAlertController(title: "Attraction added", message: "The attraction has been saved", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .destructive) { (action:UIAlertAction) in
-            print("You've pressed the ok button");
+        
+        let alertController = UIAlertController(title: "Add Attraction", message: "Are you sure you want to add this attraction to your list?", preferredStyle: .alert)
+        
+        // Create OK button
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+            // Code in this block will trigger when OK button tapped.
+            print ("Seclected Attraction is: ", (self.attractionListForTable[indexPath.row] as! AttractionsModel).attractionID);
+            
+            (self.attractionListForTable[indexPath.row] as! AttractionsModel).isCheck = true;
+            self.save(parkID: self.parkID, rideID: (self.attractionListForTable[indexPath.row] as! AttractionsModel).attractionID);
+            self.self.attractionListForTable.add(self.attractionListForTable[indexPath.row] as! AttractionsModel);
+            tableView.reloadData()
         }
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
+        alertController.addAction(OKAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action:UIAlertAction!) in
+            print("Cancel button tapped");
+        }
+        alertController.addAction(cancelAction)
+        // Present Dialog message
+        self.present(alertController, animated: true, completion:nil)
         
-        print ("Seclected Attraction is: ", (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID)
-        (attractionListForTable[indexPath.row] as! AttractionsModel).isCheck = true
-        self.save(parkID: parkID, rideID: (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID)
         
-        attractionListForTable.add(attractionListForTable[indexPath.row] as! AttractionsModel)
+        
+       
      //   userAttractionDatabase.append(UserAttractionProvider(rideID: (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID, parkID: parkID))
 
         //print("SAVED ITEM: \(person.value(forKeyPath: "rideID")!)")
