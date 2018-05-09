@@ -35,19 +35,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         
-        //deleteRecords()
-        //self.delete(parkID: 105, rideID: 1)
-        //        self.delete(IndexPath(item: 1, section: 0))
-        //        self.delete(IndexPath(item: 4, section: 0))
-        
-        //Add temp data
-//       self.save(parkID: 105, rideID: 1)
-   //     self.save(parkID: 112, rideID: 7)
-//        self.save(parkID: 188, rideID: 73)
+        deleteRecords()
+//        //self.delete(parkID: 105, rideID: 1)
+//        //        self.delete(IndexPath(item: 1, section: 0))
+//        //        self.delete(IndexPath(item: 4, section: 0))
+//
+//        //Add temp data
+//        self.save(parkID: 105, rideID: 1)
+//        //self.save(parkID: 105, rideID: 3)
 //        self.save(parkID: 112, rideID: 11)
 //        self.save(parkID: 188, rideID: 78)
+//        self.save(parkID: 112, rideID: 7)
+//        self.save(parkID: 188, rideID: 73)
 //        self.save(parkID: 138, rideID: 35)
-//
+
         
         
         listTableView.isUserInteractionEnabled = true
@@ -84,7 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let sortDescriptor = NSSortDescriptor(key: "rideID", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "parkID", ascending: true)
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "RideTrack")
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -259,8 +260,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let sourceViewController = sender.source as? ParkSearchViewController, let newPark = sourceViewController.selectedPark{
             usersParkList.add(newPark)
+            print("ADDING")
             userAttractionDatabase.append([UserAttractionProvider(parkID: newPark.parkID)])
-            printUserDatabase()
             self.listTableView.reloadData()
             self.save(parkID: newPark.parkID, rideID: -1)
             print("new park saved: ", newPark.parkID)
@@ -276,13 +277,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //Kind of funcky, but the first entry will always just be the parkID? I don't know how good of an idea this is...
             stringToPrint += "\n\nPark ID: \(userAttractionDatabase[i][0].parkID!):\n"
             for j in 1..<userAttractionDatabase[i].count{
+            //for j in 0..<userAttractionDatabase[i].count{
                 stringToPrint += "RideID: \(userAttractionDatabase[i][j].rideID!)  "
             }
             if userAttractionDatabase[i].count == 1{
                 stringToPrint += "Empty"
             }
         }
-        print("THis is size of UserAttractions: ", userAttractions.count)
+        print("This is size of UserAttractions: ", userAttractions.count)
         for i in 0..<userAttractions.count {
             let person = userAttractions[i]
         }
@@ -291,6 +293,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func dataMigrationToList() {
+        
+        print("DELTE")
         userAttractionDatabase = [[]]
         var firstTime = true
         print("\nPrint the migration:")
@@ -310,29 +314,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if firstTime{
                 //print("first time")
-                //userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
-                userAttractionDatabase[0] = [UserAttractionProvider(parkID: compare1)]
+                //userAttractionDatabase[0] = [UserAttractionProvider(parkID: compare1)]
+                userAttractionDatabase[0] = [UserAttractionProvider(rideID: -1, parkID: compare1)]
+                
                 firstTime = false
             }
             userAttractionDatabase[parkIndex].append(UserAttractionProvider(rideID: ride.value(forKeyPath: "rideID") as! Int, parkID: compare1))
             
             if compare1 != compare2 && i != userAttractions.count - 1{
                 parkIndex += 1
-                userAttractionDatabase.append([UserAttractionProvider(parkID: compare2)])
+                //userAttractionDatabase.append([UserAttractionProvider(parkID: compare2)])
+                userAttractionDatabase.append([UserAttractionProvider(rideID: -1, parkID: compare2)])
+                
                 //userAttractionDatabase.append([UserAttractionProvider(rideID: rideNext.value(forKeyPath: "parkID") as! Int, parkID: compare2)])
                 //i += 1
             }
         }
-        //        print("Expected output:")
-        //        print(userAttractionDatabase[0][0].rideID)
-        //        print(userAttractionDatabase[0][1].rideID)
-        //        print(userAttractionDatabase[0][2].rideID)
-        //        print(userAttractionDatabase[1][0].rideID)
-        //        print(userAttractionDatabase[1][1].rideID)
-        //        print(userAttractionDatabase[1][2].rideID)
         
+        //Sort each park array in asseding RideID
+        for i in 0..<userAttractionDatabase.count {
+            print(i)
+            if userAttractionDatabase[i].count != 1{
+                userAttractionDatabase[i].sort { $0.rideID < $1.rideID }
+            }
+            
+        }
         printUserDatabase()
     }
+    
     
     
     
