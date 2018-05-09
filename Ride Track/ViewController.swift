@@ -41,13 +41,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //        self.delete(IndexPath(item: 4, section: 0))
         
         //Add temp data
-//        self.save(parkID: 105, rideID: 1)
-//        self.save(parkID: 112, rideID: 7)
+//       self.save(parkID: 105, rideID: 1)
+   //     self.save(parkID: 112, rideID: 7)
 //        self.save(parkID: 188, rideID: 73)
 //        self.save(parkID: 112, rideID: 11)
 //        self.save(parkID: 188, rideID: 78)
 //        self.save(parkID: 138, rideID: 35)
-//        
+//
         
         
         listTableView.isUserInteractionEnabled = true
@@ -87,19 +87,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "RideTrack")
         fetchRequest.sortDescriptors = [sortDescriptor]
+       print("TRY TO FETCH 1")
         do {
             userAttractions = try managedContext.fetch(fetchRequest)
+            print("TRY TO FETCH 2")
+             dataMigrationToList()
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        
-        
-        
     }
     
     func itemsDownloaded(items: NSArray) {
-        dataMigrationToList()
+       
         
         feedItems = items
         
@@ -121,7 +121,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
-        printUserDatabase()
+        //printUserDatabase()
         self.listTableView.reloadData()
     }
     
@@ -278,13 +278,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("THis is size of UserAttractions: ", userAttractions.count)
         for i in 0..<userAttractions.count {
             let person = userAttractions[i]
-            print("SAVED ITEM: \(person.value(forKeyPath: "rideID")!)")
         }
         print(stringToPrint)
     }
     
     
     func dataMigrationToList() {
+        userAttractionDatabase = [[]]
         var firstTime = true
         print("\nPrint the migration:")
         var parkIndex = 0
@@ -297,7 +297,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             else{
                 rideNext = userAttractions[i]
             }
-            print("SAVED ITEM: \(ride.value(forKeyPath: "rideID")!)")
             
             let compare1 = ride.value(forKeyPath: "parkID") as! Int
             let compare2 = rideNext.value(forKeyPath: "parkID") as! Int
@@ -309,8 +308,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 firstTime = false
             }
             userAttractionDatabase[parkIndex].append(UserAttractionProvider(rideID: ride.value(forKeyPath: "rideID") as! Int, parkID: compare1))
-            
-            print("\(compare1), \(compare2)")
             
             if compare1 != compare2 && i != userAttractions.count - 1{
                 parkIndex += 1
@@ -327,7 +324,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //        print(userAttractionDatabase[1][1].rideID)
         //        print(userAttractionDatabase[1][2].rideID)
         
-        
+        printUserDatabase()
     }
     
     
