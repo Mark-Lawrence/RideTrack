@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.save(parkID: 188, rideID: 78)
         self.save(parkID: 138, rideID: 35)
 
-        
+   **/
         
         listTableView.isUserInteractionEnabled = true
         super.viewDidLoad()
@@ -227,6 +227,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedPark = usersParkList[selectedIndex!] as! ParksModel
             attractionVC.titleName = selectedPark.name
             attractionVC.parkID = selectedPark.parkID
+            attractionVC.userAttractions = userAttractions
+            
             if userAttractionDatabase != nil{
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
@@ -260,7 +262,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.save(parkID: newPark.parkID, rideID: 0)
             print("new park saved: ", newPark.parkID)
         }
-    }
     
     func printUserDatabase() {
         var stringToPrint = "Current user database:"
@@ -346,3 +347,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //    }
 }
 
+}
