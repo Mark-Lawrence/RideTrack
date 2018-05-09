@@ -65,7 +65,10 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         self.attractionsTableView.reloadData()
-        
+        if (items.count == 0){
+            print ("this park is empty")
+        }
+        else {
         startOfList = (items.firstObject as! AttractionsModel).attractionID
         if (userAttractionDatabase == nil){
             
@@ -81,6 +84,7 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         attractionListForTable.removeObject(at: 0)
+            }
     }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

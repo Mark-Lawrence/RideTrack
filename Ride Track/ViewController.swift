@@ -237,12 +237,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if userAttractionDatabase[downloadIncrementor].count != 0{
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
-                        print("match!")
                         // attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                         attractionVC.userAttractionDatabase = userAttractionDatabase[i]
                     }
                     else{
-                        print("never been to this park yet")
                     }
                 }
             }
@@ -264,7 +262,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             userAttractionDatabase.append([UserAttractionProvider(parkID: newPark.parkID)])
             printUserDatabase()
             self.listTableView.reloadData()
-            self.save(parkID: newPark.parkID, rideID: 0)
+            self.save(parkID: newPark.parkID, rideID: -1)
             print("new park saved: ", newPark.parkID)
         }
     }
