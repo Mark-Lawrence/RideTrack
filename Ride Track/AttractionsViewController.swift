@@ -53,7 +53,8 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         (attractionListForTable[indexPath.row] as! AttractionsModel).isCheck = true
         self.save(parkID: parkID, rideID: (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID)
         
-        userAttractionDatabase.append(UserAttractionProvider(rideID: (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID, parkID: parkID))
+        attractionListForTable.add(attractionListForTable[indexPath.row] as! AttractionsModel)
+     //   userAttractionDatabase.append(UserAttractionProvider(rideID: (attractionListForTable[indexPath.row] as! AttractionsModel).attractionID, parkID: parkID))
 
         //print("SAVED ITEM: \(person.value(forKeyPath: "rideID")!)")
     }
@@ -66,7 +67,10 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         self.attractionsTableView.reloadData()
         
         startOfList = (items.firstObject as! AttractionsModel).attractionID
-        
+        if (userAttractionDatabase == nil){
+            
+        }
+        else {
         for j in startOfList..<items.count+startOfList {
             for i in 1..<userAttractionDatabase.count{
                 if (userAttractionDatabase[i].rideID == j){
@@ -78,13 +82,12 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
         }
         attractionListForTable.removeObject(at: 0)
     }
-    
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attractionListForTable.count-1//used to be feedItem
     }//TO MAKE IT SHOW SAVED ATTRACTIONS, MAKE THE RESTURN userAttractionList.count
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let myCellIdentifier = "attractionCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: myCellIdentifier)!
         let item: AttractionsModel = attractionListForTable[indexPath.row] as! AttractionsModel
@@ -95,7 +98,6 @@ class AttractionsViewController: UIViewController, UITableViewDelegate, UITableV
             myCell.textLabel?.textColor = UIColor.black
         }
         myCell.textLabel!.text = item.name
-        
         return myCell
     }
     
