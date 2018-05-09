@@ -13,6 +13,7 @@ import Foundation
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var listTableView: UITableView!
+   
     
     //removed
     var feedItems: NSArray = NSArray()
@@ -32,7 +33,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var fetchRequest: NSFetchedResultsController<RideTrack>? = nil
     var managedContext: NSManagedObjectContext? = nil
+
     
+    @IBAction func resetData(_ sender: Any) {
+        deleteRecords()
+        usersParkList = []
+        listTableView.reloadData()
+    }
     override func viewDidLoad() {
         
         //deleteRecords()
