@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        self.save(parkID: 112, rideID: 11)
 //        self.save(parkID: 188, rideID: 78)
 //        self.save(parkID: 138, rideID: 35)
-//        
+//
         
         
         listTableView.isUserInteractionEnabled = true
@@ -58,6 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(usersParkList.count)
         if usersParkList.count != 0{
             print(usersParkList[usersParkList.count - 1])
+            printUserDatabase()
         }
         else{
             print("user parks list is empty")
@@ -94,8 +95,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         
-        
-        
     }
     
     func itemsDownloaded(items: NSArray) {
@@ -110,6 +109,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //            //**MARK FIX THIS***
         //            usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         //        }
+        if (userAttractionDatabase[downloadIncrementor].count == 0){
+        }
+        else{
         for i in 0..<feedItems.count{
             park = feedItems[i] as! ParksModel
             if park.parkID == userAttractionDatabase[downloadIncrementor][0].parkID{
@@ -121,8 +123,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             //usersParkList.add(feedItems[userAttractionDatabase[i][0].parkID])
         }
-        printUserDatabase()
+       // printUserDatabase()
         self.listTableView.reloadData()
+        }
     }
     
     func save(parkID: Int, rideID: Int) {
@@ -229,7 +232,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             attractionVC.parkID = selectedPark.parkID
             attractionVC.userAttractions = userAttractions
             
-            if userAttractionDatabase != nil{
+            if userAttractionDatabase[downloadIncrementor].count != 0{
                 for i in 0..<userAttractionDatabase.count {
                     if userAttractionDatabase[i][0].parkID == selectedPark.parkID{
                         print("match!")
@@ -264,6 +267,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     func printUserDatabase() {
+        if (userAttractionDatabase[downloadIncrementor].count == 0){
+            print ("Current user database is empty")
+        }
+        else{
         var stringToPrint = "Current user database:"
         for i in 0..<userAttractionDatabase.count{
             //Kind of funcky, but the first entry will always just be the parkID? I don't know how good of an idea this is...
@@ -282,7 +289,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         print(stringToPrint)
     }
-    
+    }
     
     func dataMigrationToList() {
         var firstTime = true
@@ -303,7 +310,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let compare2 = rideNext.value(forKeyPath: "parkID") as! Int
             
             if firstTime{
-                print("first time")
+                //print("first time")
                 //userAttractionDatabase.append([UserAttractionProvider(parkID: compare1)])
                 userAttractionDatabase[0] = [UserAttractionProvider(parkID: compare1)]
                 firstTime = false
