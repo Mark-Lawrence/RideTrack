@@ -9,6 +9,10 @@ import UIKit
 import CoreData
 import Foundation
 
+import AWSCore
+import AWSAuthCore
+import AWSAuthUI
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DataModelProtocol, NSFetchedResultsControllerDelegate {
     
@@ -41,11 +45,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         listTableView.reloadData()
     }
     override func viewDidLoad() {
+        print(AWSSignInManager.sharedInstance().isLoggedIn)
+        if !AWSSignInManager.sharedInstance().isLoggedIn {
+            presentAuthUIViewController()
+        }
         
         //deleteRecords()
-//        //self.delete(parkID: 105, rideID: 1)
-//        //        self.delete(IndexPath(item: 1, section: 0))
-//        //        self.delete(IndexPath(item: 4, section: 0))
+        //        //self.delete(parkID: 105, rideID: 1)
+        //        //        self.delete(IndexPath(item: 1, section: 0))
+        //        //        self.delete(IndexPath(item: 4, section: 0))
 //
 //        //Add temp data
 //        self.save(parkID: 105, rideID: 1)
@@ -349,7 +357,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         printUserDatabase()
     }
     
+    @IBAction func didSelectSignOut(_ sender: Any) {
+
+        AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
+            DispatchQueue.main.async(execute: {(
+                self.presentAuthUIViewController()
+                )})
+        })
+    }
     
+    
+    func presentAuthUIViewController() {
+        let config = AWSAuthUIConfiguration()
+        config.enableUserPoolsUI = true
+        //config.backgroundColor = UIColor.blue
+//        config.font = UIFont (name: "Helvetica Neue", size: 20)
+//        config.isBackgroundColorFullScreen = true
+//        config.canCancel = true
+//        
+        
+        
+        AWSAuthUIViewController.presentViewController(
+            with: self.navigationController!,
+            configuration: config, completionHandler: { (provider: AWSSignInProvider, error: Error?) in
+                if error == nil {
+                    // SignIn succeeded.
+                } else {
+                    // end user faced error while loggin in, take any required action here.
+                }
+        })
+    }
     
     
     //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

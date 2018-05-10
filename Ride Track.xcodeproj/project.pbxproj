@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46190FD7DA4EB04B9ED18258 /* Pods_Ride_TrackTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB83A6DD7FF7E0C6BF1F5E3 /* Pods_Ride_TrackTests.framework */; };
 		5F160B402086F87900B4037F /* ParkSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F160B3F2086F87900B4037F /* ParkSearchViewController.swift */; };
 		5F74C24A208E6CA400C71FD4 /* UserAttraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74C249208E6CA400C71FD4 /* UserAttraction.swift */; };
 		5F75594A2082B0E10060CED5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7559492082B0E10060CED5 /* AppDelegate.swift */; };
@@ -21,7 +22,10 @@
 		5F75597E2083D2E30060CED5 /* AttractionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */; };
 		5F7559802083D40E0060CED5 /* ParksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75597F2083D40E0060CED5 /* ParksModel.swift */; };
 		5FA851BF20A102B300566184 /* RideTrack.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */; };
+		5FFF5E7C20A4B81E00B8CF97 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FFF5E7B20A4B81E00B8CF97 /* awsconfiguration.json */; };
 		98F96E9720A0DB9C005F936D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98F96E9620A0DB9C005F936D /* CoreData.framework */; };
+		B54BD56458BF75E8992CAAF2 /* Pods_Ride_TrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138FDE9097B2631FCCDF0A12 /* Pods_Ride_TrackUITests.framework */; };
+		D26AD3CED0511FE65EBA05E3 /* Pods_Ride_Track.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDD03ABE37BFD235C7DBC2D /* Pods_Ride_Track.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		138FDE9097B2631FCCDF0A12 /* Pods_Ride_TrackUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ride_TrackUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A18A3B220F29D9A3C2BFE68 /* Pods-Ride TrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride TrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ride TrackTests/Pods-Ride TrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F160B3F2086F87900B4037F /* ParkSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkSearchViewController.swift; sourceTree = "<group>"; };
 		5F74C249208E6CA400C71FD4 /* UserAttraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAttraction.swift; sourceTree = "<group>"; };
 		5F7559462082B0E10060CED5 /* Ride Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ride Track.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +68,15 @@
 		5F75597D2083D2E30060CED5 /* AttractionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionsViewController.swift; sourceTree = "<group>"; };
 		5F75597F2083D40E0060CED5 /* ParksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParksModel.swift; sourceTree = "<group>"; };
 		5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RideTrack.xcdatamodel; sourceTree = "<group>"; };
+		5FFF5E7B20A4B81E00B8CF97 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		659604BDA9481FFE82F48647 /* Pods-Ride TrackUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride TrackUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ride TrackUITests/Pods-Ride TrackUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6CDD03ABE37BFD235C7DBC2D /* Pods_Ride_Track.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ride_Track.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96AA33EB0E4B3FA4C33386C5 /* Pods-Ride Track.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride Track.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ride Track/Pods-Ride Track.release.xcconfig"; sourceTree = "<group>"; };
 		98F96E9620A0DB9C005F936D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9C27304B77A8DCD8E8A26720 /* Pods-Ride TrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride TrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ride TrackTests/Pods-Ride TrackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B53D74E479ED5DED9F0AFF22 /* Pods-Ride TrackUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride TrackUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ride TrackUITests/Pods-Ride TrackUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F6440EA5BB06C9CA8C214263 /* Pods-Ride Track.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ride Track.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ride Track/Pods-Ride Track.debug.xcconfig"; sourceTree = "<group>"; };
+		FFB83A6DD7FF7E0C6BF1F5E3 /* Pods_Ride_TrackTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ride_TrackTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98F96E9720A0DB9C005F936D /* CoreData.framework in Frameworks */,
+				D26AD3CED0511FE65EBA05E3 /* Pods_Ride_Track.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46190FD7DA4EB04B9ED18258 /* Pods_Ride_TrackTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,12 +101,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54BD56458BF75E8992CAAF2 /* Pods_Ride_TrackUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48930FD8330832C22472C0F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6440EA5BB06C9CA8C214263 /* Pods-Ride Track.debug.xcconfig */,
+				96AA33EB0E4B3FA4C33386C5 /* Pods-Ride Track.release.xcconfig */,
+				9C27304B77A8DCD8E8A26720 /* Pods-Ride TrackTests.debug.xcconfig */,
+				5A18A3B220F29D9A3C2BFE68 /* Pods-Ride TrackTests.release.xcconfig */,
+				659604BDA9481FFE82F48647 /* Pods-Ride TrackUITests.debug.xcconfig */,
+				B53D74E479ED5DED9F0AFF22 /* Pods-Ride TrackUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5F75593D2082B0E10060CED5 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +129,7 @@
 				5F7559682082B0E80060CED5 /* Ride TrackUITests */,
 				5F7559472082B0E10060CED5 /* Products */,
 				98F96E9520A0DB9C005F936D /* Frameworks */,
+				48930FD8330832C22472C0F7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +157,7 @@
 				5F75597F2083D40E0060CED5 /* ParksModel.swift */,
 				5F7559502082B0E80060CED5 /* Assets.xcassets */,
 				5F7559522082B0E80060CED5 /* LaunchScreen.storyboard */,
+				5FFF5E7B20A4B81E00B8CF97 /* awsconfiguration.json */,
 				5F7559552082B0E80060CED5 /* Info.plist */,
 				5FA851BE20A102B300566184 /* RideTrack.xcdatamodel */,
 			);
@@ -154,6 +186,9 @@
 			isa = PBXGroup;
 			children = (
 				98F96E9620A0DB9C005F936D /* CoreData.framework */,
+				6CDD03ABE37BFD235C7DBC2D /* Pods_Ride_Track.framework */,
+				FFB83A6DD7FF7E0C6BF1F5E3 /* Pods_Ride_TrackTests.framework */,
+				138FDE9097B2631FCCDF0A12 /* Pods_Ride_TrackUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,9 +200,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F75596E2082B0E80060CED5 /* Build configuration list for PBXNativeTarget "Ride Track" */;
 			buildPhases = (
+				81903E19AFC1F1147A3351CB /* [CP] Check Pods Manifest.lock */,
 				5F7559422082B0E10060CED5 /* Sources */,
 				5F7559432082B0E10060CED5 /* Frameworks */,
 				5F7559442082B0E10060CED5 /* Resources */,
+				D8EE1BBD4460A6BB2D114911 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,6 +219,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F7559712082B0E80060CED5 /* Build configuration list for PBXNativeTarget "Ride TrackTests" */;
 			buildPhases = (
+				705E6C915703E23E37B46395 /* [CP] Check Pods Manifest.lock */,
 				5F7559562082B0E80060CED5 /* Sources */,
 				5F7559572082B0E80060CED5 /* Frameworks */,
 				5F7559582082B0E80060CED5 /* Resources */,
@@ -200,6 +238,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F7559742082B0E80060CED5 /* Build configuration list for PBXNativeTarget "Ride TrackUITests" */;
 			buildPhases = (
+				7843108BBDE4AA8F96439BF7 /* [CP] Check Pods Manifest.lock */,
 				5F7559612082B0E80060CED5 /* Sources */,
 				5F7559622082B0E80060CED5 /* Frameworks */,
 				5F7559632082B0E80060CED5 /* Resources */,
@@ -265,6 +304,7 @@
 				5F7559542082B0E80060CED5 /* LaunchScreen.storyboard in Resources */,
 				5F7559512082B0E80060CED5 /* Assets.xcassets in Resources */,
 				5F75594F2082B0E10060CED5 /* Main.storyboard in Resources */,
+				5FFF5E7C20A4B81E00B8CF97 /* awsconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +323,95 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		705E6C915703E23E37B46395 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ride TrackTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7843108BBDE4AA8F96439BF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ride TrackUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81903E19AFC1F1147A3351CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ride Track-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8EE1BBD4460A6BB2D114911 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Ride Track/Pods-Ride Track-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSPinpoint/AWSPinpoint.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSPinpoint.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ride Track/Pods-Ride Track-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F7559422082B0E10060CED5 /* Sources */ = {
@@ -468,6 +597,7 @@
 		};
 		5F75596F2082B0E80060CED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6440EA5BB06C9CA8C214263 /* Pods-Ride Track.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +616,7 @@
 		};
 		5F7559702082B0E80060CED5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96AA33EB0E4B3FA4C33386C5 /* Pods-Ride Track.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -504,6 +635,7 @@
 		};
 		5F7559722082B0E80060CED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C27304B77A8DCD8E8A26720 /* Pods-Ride TrackTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -525,6 +657,7 @@
 		};
 		5F7559732082B0E80060CED5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A18A3B220F29D9A3C2BFE68 /* Pods-Ride TrackTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -546,6 +679,7 @@
 		};
 		5F7559752082B0E80060CED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 659604BDA9481FFE82F48647 /* Pods-Ride TrackUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -566,6 +700,7 @@
 		};
 		5F7559762082B0E80060CED5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B53D74E479ED5DED9F0AFF22 /* Pods-Ride TrackUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

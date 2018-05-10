@@ -102,20 +102,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="av5-As-4vk">
-                                <rect key="frame" x="285" y="64" width="86" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Rest all Data"/>
-                                <connections>
-                                    <action selector="resetData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huP-e4-D6z"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nb-Xl-qwe">
-                                <rect key="frame" x="281" y="94" width="94" height="30"/>
+                                <rect key="frame" x="109" y="64" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add new park"/>
                                 <connections>
                                     <segue destination="0zg-md-OYR" kind="presentation" identifier="toSearch" id="6B6-jh-Y6W"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9s-vr-HYd">
+                                <rect key="frame" x="310" y="64" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Sign out"/>
+                                <connections>
+                                    <action selector="didSelectSignOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5H-9w-MWX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="av5-As-4vk">
+                                <rect key="frame" x="207" y="64" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Rest all Data"/>
+                                <connections>
+                                    <action selector="resetData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huP-e4-D6z"/>
                                 </connections>
                             </button>
                         </subviews>
